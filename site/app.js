@@ -6,7 +6,7 @@
   const pad = n => String(n).padStart(2,'0');
   const todayISO = () => { const d=new Date(); return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; };
   const DB_NAME='kakeibo_local_v1', STORE='expenses';
-  const APP_VERSION='1.10.20';
+  const APP_VERSION='1.11.0';
   let db, pendingPhotos=[], photoPreviewURLs=[], ocrRaw='', parsedItems=[], deferredPrompt=null;
   let calCursor = new Date(); calCursor.setDate(1);
   let selectedDate = todayISO();
@@ -2826,8 +2826,81 @@
     const cats={}; month.forEach(x=>addExpenseCategories(cats,x));
     const ce=$('#categoryBars');ce.innerHTML=''; const max=Math.max(1,...Object.values(cats)); const entries=Object.entries(cats).sort((a,b)=>b[1]-a[1]);
     if(!entries.length) ce.innerHTML='<div class="empty">まだ支出がありません</div>'; else entries.forEach(([k,v])=>{ce.insertAdjacentHTML('beforeend',`<div class="bar-row"><span>${esc(k)}</span><div class="bar-track"><div class="bar-fill" style="width:${Math.round(v/max*100)}%;background:${catColor(k)}"></div></div><strong>${yen(v)}</strong></div>`)});
+    fbMonthRows=month; fbToday=`${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}`; try{ renderFoodBudget(); }catch(e){ console.warn(e); }   // v1.11.0: the same records and day as the bars above
     renderExpenseList($('#recentList'),all.sort((a,b)=>b.date.localeCompare(a.date)||b.createdAt-a.createdAt).slice(0,6),true,true);
     renderBackupInfo();
+  }
+  // ---- v1.11.0: 今月の食費 (a budget for 食費 and what is left of it this month) ----
+  // The amount used is the 食費 of this month as the カテゴリ別 bars count it (addExpenseCategories: tax and receipt-level discounts spread over the
+  // items in proportion), never a calculation of its own; 外食 is another category. Records dated later this month count, as they do in the bars.
+  // The budget is kept in localStorage only: it is not part of the backup (format 1 is unchanged) and no expense is ever written for it.
+  const FOOD_BUDGET_KEY='kakeibo_food_budget_v1', FOOD_BUDGET_CATEGORY='食費', FOOD_BUDGET_MAX=10000000;
+  let fbMonthRows=null, fbToday='', fbEditing=false;
+  function validFoodBudgetAmount(n){ return typeof n==='number'&&Number.isInteger(n)&&n>=1&&n<=FOOD_BUDGET_MAX; }
+  // the stored text → {amount,updatedAt}, or null (unset) when it is missing, broken or out of range
+  function parseFoodBudget(raw){
+    if(raw==null||raw==='') return null;
+    try{ const v=JSON.parse(raw); if(!v||typeof v!=='object'||Array.isArray(v)||!validFoodBudgetAmount(v.amount)) return null; const t=Number(v.updatedAt); return {amount:v.amount,updatedAt:Number.isFinite(t)&&t>0?t:0}; }catch(_){ return null; }
+  }
+  function loadFoodBudget(){ try{ return parseFoodBudget(localStorage.getItem(FOOD_BUDGET_KEY)); }catch(_){ return null; } }
+  function saveFoodBudget(amount){ if(!validFoodBudgetAmount(amount)) return false; try{ localStorage.setItem(FOOD_BUDGET_KEY,JSON.stringify({amount,updatedAt:Date.now()})); return true; }catch(_){ return false; } }
+  function clearFoodBudget(){ try{ localStorage.removeItem(FOOD_BUDGET_KEY); return true; }catch(_){ return false; } }
+  // the text of the budget field → {ok:true,amount} or {ok:false,error}. A whole number of yen from 1 to 10,000,000
+  function parseFoodBudgetInput(s){
+    const t=String(s==null?'':s).normalize('NFKC').trim();
+    if(!t) return {ok:false,error:'予算の金額を入力してください'};
+    if(!/^[+-]?\d+(?:\.\d+)?$/.test(t)) return {ok:false,error:'予算は数字で入力してください'};
+    const n=Number(t);
+    if(!Number.isInteger(n)||n<1||n>FOOD_BUDGET_MAX) return {ok:false,error:'予算は1〜10,000,000円の整数で入力してください'};
+    return {ok:true,amount:n};
+  }
+  // budget: an amount or {amount} (anything else is unset), expenses: saved records, today: 'YYYY-MM-DD' (local day). used + remaining = budget always
+  function foodBudgetStatus(budget,expenses,today){
+    const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(String(today||'')); if(!m) return null;
+    const y=Number(m[1]), mo=Number(m[2]), d=Number(m[3]), ym=`${m[1]}-${m[2]}`, daysInMonth=new Date(y,mo,0).getDate();
+    const month=(Array.isArray(expenses)?expenses:[]).filter(x=>x&&typeof x.date==='string'&&x.date.startsWith(ym));
+    const food=categoryTotals(month)[FOOD_BUDGET_CATEGORY]||0, used=Math.round(food), daysLeft=Math.max(1,daysInMonth-d+1);
+    const amount=budget&&typeof budget==='object'?budget.amount:budget;
+    if(!validFoodBudgetAmount(amount)) return {set:false,ym,food,used,budget:null,remaining:null,over:false,overBy:0,percent:0,level:'',daysLeft,perDay:null};
+    const remaining=amount-used, over=remaining<0, ratio=used/amount;
+    return {set:true,ym,food,used,budget:amount,remaining,over,overBy:over?-remaining:0,percent:Math.min(100,Math.max(0,ratio*100)),level:over?'over':ratio>=0.8?'warm':'ok',daysLeft,perDay:over?null:Math.floor(remaining/daysLeft)};
+  }
+  function foodBudgetHtml(st){
+    if(!st||!st.set) return `<p class="fb-empty">食費の予算を決めると、今月あといくら使えるかを表示します</p><button type="button" class="secondary full fb-edit" data-fb-edit>予算を設定</button>`;
+    const pct=Math.round(st.percent*10)/10;
+    return `<div class="fb-top"><span class="fb-label">${st.over?'今月の食費':'今月の食費 残り'}</span> <strong class="fb-amount"><span class="fb-num">${esc(yen(st.over?st.overBy:st.remaining))}</span>${st.over?' <span class="fb-over">オーバー</span>':''}</strong><button type="button" class="text-btn fb-edit" data-fb-edit aria-label="食費の予算を変更">変更</button></div>`
+      +`<div class="fb-bar" role="progressbar" aria-label="食費の予算を使った割合" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.floor(st.percent)}"><div class="fb-fill" style="width:${pct}%"></div></div>`
+      +`<p class="fb-line"><span class="fb-nw">使った ${esc(yen(st.used))}</span> ／ <span class="fb-nw">予算 ${esc(yen(st.budget))}</span></p>`
+      +`<p class="fb-line">${st.over?`<span class="fb-nw">あと${st.daysLeft}日</span>`:`<span class="fb-nw">あと${st.daysLeft}日</span>・<span class="fb-nw">1日あたり ${esc(yen(st.perDay))}</span>`}</p>`;
+  }
+  // draws the card from the records and day of the last renderHome (the editor, while open, is left as it is)
+  function renderFoodBudget(){
+    const card=$('#foodBudgetCard'), view=$('#foodBudgetView'); if(!card||!view||!fbMonthRows) return;
+    const st=foodBudgetStatus(loadFoodBudget(),fbMonthRows,fbToday||todayISO());
+    card.classList.toggle('is-set',!!(st&&st.set)); card.classList.toggle('is-warm',!!(st&&st.level==='warm')); card.classList.toggle('is-over',!!(st&&st.level==='over'));
+    view.innerHTML=foodBudgetHtml(st); view.classList.toggle('hidden',fbEditing);
+  }
+  function showFoodBudgetError(msg){ const e=$('#foodBudgetError'), i=$('#foodBudgetInput'); if(e){ e.textContent=msg||''; e.classList.toggle('hidden',!msg); } if(i){ if(msg) i.setAttribute('aria-invalid','true'); else i.removeAttribute('aria-invalid'); } }
+  function openFoodBudgetEditor(){
+    const b=loadFoodBudget(), f=$('#foodBudgetForm'), i=$('#foodBudgetInput'); if(!f||!i) return;
+    fbEditing=true; i.value=b?String(b.amount):''; showFoodBudgetError('');
+    $('#foodBudgetClearBtn').classList.toggle('hidden',!b); f.classList.remove('hidden'); $('#foodBudgetView').classList.add('hidden');
+    try{ i.focus(); }catch(_){ }
+  }
+  function closeFoodBudgetEditor(){
+    fbEditing=false; const f=$('#foodBudgetForm'); if(f) f.classList.add('hidden'); showFoodBudgetError(''); renderFoodBudget();
+    try{ const b=$('#foodBudgetView [data-fb-edit]'); if(b) b.focus({preventScroll:true}); }catch(_){ }
+  }
+  function submitFoodBudget(){
+    const r=parseFoodBudgetInput($('#foodBudgetInput').value);
+    if(!r.ok){ const i=$('#foodBudgetInput'); showFoodBudgetError(i&&i.validity&&i.validity.badInput?'予算は数字で入力してください':r.error); try{ i.focus(); }catch(_){ } return; }
+    if(saveFoodBudget(r.amount)){ closeFoodBudgetEditor(); toast('食費の予算を保存しました'); }
+    else { closeFoodBudgetEditor(); toast('予算を保存できませんでした。端末の空き容量やプライベートブラウズの設定を確かめてください',{error:true}); }
+  }
+  async function removeFoodBudget(){
+    if(!(await askConfirm('食費の予算を解除しますか？\n\n記録した支出はそのまま残ります。',{ok:'解除する',danger:true}))) return;
+    if(clearFoodBudget()){ closeFoodBudgetEditor(); toast('食費の予算を解除しました'); }
+    else { closeFoodBudgetEditor(); toast('予算を解除できませんでした。もう一度お試しください',{error:true}); }
   }
   // items of one saved record, shown under the row (built when first opened)
   function expenseDetailHtml(x){
@@ -3339,6 +3412,14 @@
 
   $$('.bottom-nav button').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view)));
   $('#goCalendarBtn').addEventListener('click',()=>showView('calendarView'));
+  // v1.11.0: 今月の食費. Each element is looked up first: a page of an older version (before the reload of checkVersions) has no card
+  { const v=$('#foodBudgetView'), f=$('#foodBudgetForm'), c=$('#foodBudgetCancelBtn'), r=$('#foodBudgetClearBtn'), i=$('#foodBudgetInput');
+    if(v) v.addEventListener('click',e=>{ if(e.target.closest('[data-fb-edit]')) openFoodBudgetEditor(); });
+    if(f) f.addEventListener('submit',e=>{ e.preventDefault(); submitFoodBudget(); });
+    if(c) c.addEventListener('click',closeFoodBudgetEditor);
+    if(r) r.addEventListener('click',removeFoodBudget);
+    if(i) i.addEventListener('input',()=>showFoodBudgetError(''));
+    window.addEventListener('storage',e=>{ if((!e.key||e.key===FOOD_BUDGET_KEY)&&!fbEditing){ try{ renderFoodBudget(); }catch(_){ } } }); }   // set or cleared in another tab
   $('#cameraInput').addEventListener('change',e=>{addReceiptPhotos(e.target.files);e.target.value='';});
   $('#galleryInput').addEventListener('change',e=>{addReceiptPhotos(e.target.files);e.target.value='';});
   $('#liveScanBtn').addEventListener('click',()=>openLiveScan('new')); $('#liveCloseBtn').addEventListener('click',closeLiveScan); $('#liveShutterBtn').addEventListener('click',liveShutter);
@@ -3430,7 +3511,7 @@
   $('#reloadAppBtn').addEventListener('click',()=>location.reload());
 
   // pure helpers for automated tests (no data access)
-  window.__KAKEIBO_TEST__=Object.freeze({taxMetaOfRecord,taxFieldsForSave,taxMixOf,parseAmountField,itemBasisOf,version:APP_VERSION,normalizeLine,parseAmountToken,splitAmount,classifyLine,extractDate,extractStore,parseReceipt,mergeReceiptPages,boundaryAnalysis,boundaryOverlap,sumCheckInfo,classifyItem,normalizeProductName,addExpenseCategories,categoryTotals,validateBackup,cleanExpense,calendarAmount,pairColumnLines,dbBoxes,minAreaRect,cropLine,assessReading,paperRangeFromPixels,eanValid,paperRange,readQuality,priceColumn,fixPriceText,priceLike,yenShort,similarity,rememberNameFix,findNameFix,loadNameFixes,clearCategoryLearning,paperShare,sharpnessOf,liveCameraMessage,putExpense,refreshAggregates,allExpenses,ctcDecode,assembleRows,loadPaddle,paddleRecognize,paperColumnRange,cropScale,readJpegInfo,orientMatrix,manualOrientation,ocrScale,enhanceGray,preprocess});
+  window.__KAKEIBO_TEST__=Object.freeze({foodBudgetStatus,parseFoodBudget,parseFoodBudgetInput,loadFoodBudget,saveFoodBudget,clearFoodBudget,foodBudgetKey:FOOD_BUDGET_KEY,taxMetaOfRecord,taxFieldsForSave,taxMixOf,parseAmountField,itemBasisOf,version:APP_VERSION,normalizeLine,parseAmountToken,splitAmount,classifyLine,extractDate,extractStore,parseReceipt,mergeReceiptPages,boundaryAnalysis,boundaryOverlap,sumCheckInfo,classifyItem,normalizeProductName,addExpenseCategories,categoryTotals,validateBackup,cleanExpense,calendarAmount,pairColumnLines,dbBoxes,minAreaRect,cropLine,assessReading,paperRangeFromPixels,eanValid,paperRange,readQuality,priceColumn,fixPriceText,priceLike,yenShort,similarity,rememberNameFix,findNameFix,loadNameFixes,clearCategoryLearning,paperShare,sharpnessOf,liveCameraMessage,putExpense,refreshAggregates,allExpenses,ctcDecode,assembleRows,loadPaddle,paddleRecognize,paperColumnRange,cropScale,readJpegInfo,orientMatrix,manualOrientation,ocrScale,enhanceGray,preprocess});
 
   openDB().then(()=>renderHome()).catch(()=>toast('端末保存を初期化できませんでした',{error:true}));
 })();

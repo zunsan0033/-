@@ -283,4 +283,32 @@ input[type=date]::-webkit-date-and-time-value{text-align:left}
 .tax-actions .text-btn[hidden]{display:none}
 .detail-extra .d-src{display:inline-block;margin-left:6px;font-size:12px;font-weight:400;color:var(--muted)}
 /* v1.10.15: the version of this style sheet (app.js checks that the page, the style sheet and app.js are of one version) */
-:root{--kakeibo-version:"1.10.20"}
+:root{--kakeibo-version:"1.11.0"}
+
+/* v1.11.0: 今月の食費 (the card between the summary and カテゴリ別). Only new classes; the rules above are as they were */
+.food-budget .fb-empty{margin:0;font-size:13px;line-height:1.6;color:var(--muted)}
+.food-budget .fb-edit.full{margin-top:12px}
+.food-budget .fb-top{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:2px 12px}
+.food-budget .fb-label{grid-column:1;grid-row:1;font-size:14px;font-weight:800;color:var(--text)}
+.food-budget .fb-top .fb-edit{grid-column:2;grid-row:1}
+.food-budget .fb-amount{grid-column:1/-1;grid-row:2;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 8px;min-width:0;margin:2px 0 12px;color:var(--accent-deep)}
+.food-budget .fb-num{font-size:clamp(26px,8.5vw,34px);font-weight:800;letter-spacing:-.03em;line-height:1.15;white-space:nowrap;font-variant-numeric:tabular-nums}
+.food-budget .fb-over{font-size:16px;font-weight:800;white-space:nowrap}
+.food-budget.is-over .fb-amount{color:var(--danger)}
+.food-budget .fb-bar{height:10px;background:var(--soft);border-radius:99px;overflow:hidden}
+.food-budget .fb-fill{height:100%;max-width:100%;background:var(--accent);border-radius:99px}
+.food-budget.is-warm .fb-fill{background:var(--warm)}
+.food-budget.is-over .fb-fill{background:var(--danger)}
+.food-budget .fb-line{margin:8px 0 0;font-size:13px;line-height:1.5;color:var(--muted);font-variant-numeric:tabular-nums}
+.food-budget .fb-line+.fb-line{margin-top:2px}
+.food-budget .fb-nw{white-space:nowrap}
+.food-budget .fb-form{display:grid;gap:8px}
+.food-budget .fb-field{font-size:13px;font-weight:800;color:var(--text)}
+.food-budget .fb-input-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px}
+.food-budget .fb-input-row input{min-width:0;text-align:right;font-variant-numeric:tabular-nums}
+.food-budget .fb-unit{font-size:14px;font-weight:700;color:var(--muted)}
+.food-budget .fb-input-row input[aria-invalid="true"]{border-color:var(--danger);background:#fff5f4}
+.food-budget .fb-error{margin:0;font-size:12px;line-height:1.5;color:var(--danger);font-weight:700}
+.food-budget .fb-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
+.food-budget .fb-actions button{min-height:48px;padding:0 8px}
+.food-budget .fb-clear{justify-self:start;margin:4px 0 0;padding:8px 0;min-width:0;color:var(--danger)}

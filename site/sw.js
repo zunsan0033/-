@@ -1,3 +1,5 @@
+// v1.11.0 (2026-10-16): 今月の食費 on ホーム (a monthly budget for 食費 and what is left of it). The budget is kept in localStorage only
+// (kakeibo_food_budget_v1); IndexedDB, the backup (format 1) and the saved records are unchanged
 // v1.10.20: stable row identities keep the tax amount bound to the rows confirmed, across edits, saves, resets and backup restoration.
 // v1.10.19 (2026-10-06): an item added by hand keeps its mark (added: 1) through saving, reloading and restoring a backup: its tax rate is never taken
 // from the receipt, and the check is not 一致 while it is unknown (also when the item sum is the same as before)
@@ -31,7 +33,7 @@
 // v1.10.6 (2026-10-04): 内税 is never added to items priced with tax, tax and discount can be corrected by hand, and how a tax amount was obtained is kept with the record
 // v1.10.5 (2026-10-03): landscape camera buttons can be tapped, a read tax amount is never rewritten, the match check uses every tax and discount read,
 // the total candidate is applied as shown, a restore reaches other open tabs
-const APP_CACHE='kakeibo-app-v11020-layout1';
+const APP_CACHE='kakeibo-app-v11100';
 const ENGINE_CACHE='kakeibo-engine-v1';   // OCR engine and models from jsDelivr (about 33MB), kept across app updates
 const ASSETS=['./','./index.html','./styles.css','./app.js','./manifest.webmanifest','./icon.svg','./icon-192.png','./icon-512.png','./apple-touch-icon.png'];
 const isEngine=u=>u.indexOf('https://cdn.jsdelivr.net/')===0;

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net blob: 'unsafe-eval' 'wasm-unsafe-eval'; worker-src 'self' blob: https://cdn.jsdelivr.net; child-src 'self' blob:; connect-src 'self' https://cdn.jsdelivr.net blob: data:; img-src 'self' blob: data:; style-src 'self' 'unsafe-inline'; font-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'" />
   <meta name="referrer" content="no-referrer" />
-  <meta name="kakeibo-version" content="1.10.20" />
+  <meta name="kakeibo-version" content="1.11.0" />
   <meta name="theme-color" content="#fbf8f3" />
   <title>かんたん家計簿</title>
   <link rel="manifest" href="./manifest.webmanifest" />
@@ -18,7 +18,7 @@
   <div class="app-shell">
     <header class="topbar">
       <div>
-        <p class="eyebrow">LOCAL FIRST <span id="appVersion" class="app-version">v1.10.20</span></p>
+        <p class="eyebrow">LOCAL FIRST <span id="appVersion" class="app-version">v1.11.0</span></p>
         <h1>かんたん家計簿</h1>
       </div>
       <button id="installBtn" class="ghost small" hidden>ホームに追加</button>
@@ -37,6 +37,20 @@
             <div><span>1日平均</span><b id="dailyAvg">¥0</b></div>
           </div>
         </div>
+
+        <section id="foodBudgetCard" class="section-block food-budget" aria-label="今月の食費">
+          <div id="foodBudgetView" class="fb-view"></div>
+          <form id="foodBudgetForm" class="fb-form hidden" novalidate>
+            <label class="fb-field" for="foodBudgetInput">食費の予算（1か月）</label>
+            <div class="fb-input-row"><input id="foodBudgetInput" type="number" inputmode="numeric" min="1" max="10000000" step="1" placeholder="例：30000" autocomplete="off" aria-describedby="foodBudgetError" /><span class="fb-unit" aria-hidden="true">円</span></div>
+            <p id="foodBudgetError" class="fb-error hidden" role="alert"></p>
+            <div class="fb-actions">
+              <button type="submit" class="primary">保存</button>
+              <button id="foodBudgetCancelBtn" type="button" class="secondary">キャンセル</button>
+            </div>
+            <button id="foodBudgetClearBtn" type="button" class="text-btn fb-clear">予算を解除</button>
+          </form>
+        </section>
 
         <section class="section-block">
           <div class="section-title"><h2>カテゴリ別</h2><span id="categoryMonthLabel" class="muted"></span></div>
