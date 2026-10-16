@@ -1,0 +1,6 @@
+# Netlify response headers (ignored by other hosts)
+/*
+  X-Frame-Options: DENY
+  Content-Security-Policy: frame-ancestors 'none'
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer

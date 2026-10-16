@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net blob: 'unsafe-eval' 'wasm-unsafe-eval'; worker-src 'self' blob: https://cdn.jsdelivr.net; child-src 'self' blob:; connect-src 'self' https://cdn.jsdelivr.net blob: data:; img-src 'self' blob: data:; style-src 'self' 'unsafe-inline'; font-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'" />
+  <meta name="referrer" content="no-referrer" />
+  <meta name="kakeibo-version" content="1.10.20" />
+  <meta name="theme-color" content="#fbf8f3" />
+  <title>かんたん家計簿</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="updateBanner" class="update-banner hidden" role="status"><span>新しいバージョンがあります</span><button id="reloadAppBtn" type="button">再読み込み</button></div>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">LOCAL FIRST <span id="appVersion" class="app-version">v1.10.20</span></p>
+        <h1>かんたん家計簿</h1>
+      </div>
+      <button id="installBtn" class="ghost small" hidden>ホームに追加</button>
+    </header>
+
+    <main>
+      <section id="homeView" class="view active" aria-label="ホーム">
+        <div class="hero-card">
+          <div>
+            <span id="monthLabel" class="muted"></span>
+            <strong id="monthTotal" class="big-money">¥0</strong>
+          </div>
+          <div class="hero-grid">
+            <div><span>今日</span><b id="todayTotal">¥0</b></div>
+            <div><span>件数</span><b id="monthCount">0件</b></div>
+            <div><span>1日平均</span><b id="dailyAvg">¥0</b></div>
+          </div>
+        </div>
+
+        <section class="section-block">
+          <div class="section-title"><h2>カテゴリ別</h2><span id="categoryMonthLabel" class="muted"></span></div>
+          <div id="categoryBars" class="category-bars"></div>
+        </section>
+
+        <section class="section-block">
+          <div class="section-title"><h2>最近の支出</h2><button id="goCalendarBtn" class="text-btn">カレンダー</button></div>
+          <div id="recentList" class="list"></div>
+        </section>
+
+        <details id="backupPanel" class="section-block backup-panel">
+          <summary><span class="backup-summary-title">データのバックアップ<small>（任意）</small></span><span id="lastBackup" class="muted">未保存</span></summary>
+          <p id="backupHelp" class="muted backup-help">データはこの端末の中だけに保存されています。機種変更などに備えたいときだけ保存してください。</p>
+          <div class="backup-actions">
+            <button id="exportBackupBtn" type="button" class="secondary">バックアップを保存</button>
+            <label class="secondary upload-btn">バックアップから復元<input id="importBackupInput" type="file" accept="application/json,.json" hidden /></label>
+          </div>
+        </details>
+      </section>
+
+      <section id="scanView" class="view" aria-label="レシート読み取り">
+        <button id="resumeConfirmBtn" type="button" class="primary full resume-btn hidden">読み取り結果に戻る</button>
+        <div class="scan-card">
+          <div class="camera-icon">▣</div>
+          <h2>レシートを撮影</h2>
+          <p>長いレシートは2〜3回に分けて撮影できます。追加した写真はまとめて1件のレシートとして読み取ります。</p>
+          <button id="liveScanBtn" type="button" class="primary full live-btn">カメラにかざして自動で読み取る</button>
+          <p class="hint live-hint">枠に入れて動かさずに持つと、自動で撮影して読み取ります</p>
+          <label class="secondary upload-btn">
+            <span id="cameraButtonText">読み取り</span>
+            <input id="cameraInput" type="file" accept="image/*" capture="environment" hidden />
+          </label>
+          <label class="secondary upload-btn">
+            写真から追加
+            <input id="galleryInput" type="file" accept="image/*" multiple hidden />
+          </label>
+          <p class="hint">境目を少し重ねて撮っても、連続する重複行は自動で除外します。写真は保存しません。</p>
+        </div>
+
+        <section id="photoQueuePanel" class="section-block hidden">
+          <div class="section-title"><div><h2>このレシートの写真</h2><span id="photoCount" class="muted">0枚</span></div><button id="clearPhotosBtn" type="button" class="text-btn">すべて外す</button></div>
+          <div id="photoQueue" class="photo-queue"></div>
+          <button id="readAllBtn" type="button" class="primary full">すべて読み取る</button>
+        </section>
+
+        <p class="muted scan-tips">きれいに読むコツ：レシートを平らにして明るい場所で、暗めの机などに置き、レシートが画面の横幅いっぱいになるように真上から撮ってください。長いレシートは2〜3枚に分け、少し重ねて撮ります。</p>
+        <div id="ocrPanel" class="section-block hidden">
+          <div class="section-title"><h2>読み取り中</h2><span id="ocrPercent">0%</span></div>
+          <div class="progress"><div id="ocrProgress"></div></div>
+          <p id="ocrStatus" class="muted">準備中…</p>
+          <button id="cancelOcrBtn" type="button" class="secondary full cancel-ocr" hidden>中止</button>
+          <img id="receiptPreview" class="receipt-preview" alt="読み取り中のレシート写真" />
+        </div>
+
+        <details id="pastePanel" class="section-block backup-panel paste-panel">
+          <summary><span class="backup-summary-title">iPhoneの文字認識で読み取る</span><span class="muted">うまく読めないとき</span></summary>
+          <ol class="paste-steps">
+            <li>下の欄をタップして「テキストをスキャン」を選び、レシートを写して「挿入」を押します（iOS 16以降）。</li>
+            <li>写真アプリでレシートの写真を開き、文字を長押し→「すべてを選択」→「コピー」して、下の欄に貼り付けることもできます。</li>
+            <li>長いレシートを2回以上に分けて入れるときは、あいだに「----- 区切り -----」の行を入れてください（重なった部分は1回分として読み取ります）。</li>
+          </ol>
+          <textarea id="pasteText" rows="7" maxlength="20000" placeholder="ここにレシートの文字を入れます"></textarea>
+          <button id="pasteReadBtn" type="button" class="primary full">この文字で読み取る</button>
+        </details>
+
+        <section class="section-block learning-panel">
+          <div class="section-title"><div><h2>分類学習</h2><span class="muted">修正した商品を次回から優先します</span></div><span id="learnedCount" class="learning-count">0件を記憶中</span></div>
+          <div id="learningList" class="learning-list"></div>
+          <button id="resetCategoryLearningBtn" type="button" class="secondary full">学習内容をリセット</button>
+        </section>
+      </section>
+
+      <section id="confirmView" class="view" aria-label="読み取り確認">
+        <div class="section-title"><div><h2>読み取り結果を確認</h2><span id="confirmPhotoCount" class="muted"></span></div><button id="rescanBtn" class="text-btn">撮り直す</button></div>
+        <div id="confirmNotes" class="confirm-notes hidden" aria-live="polite"></div>
+        <div class="form-card">
+          <label>日付<input id="dateField" type="date" min="2000-01-01" max="2099-12-31" /></label>
+          <label>店舗名<input id="storeField" maxlength="100" type="text" placeholder="例：スーパー○○" /></label>
+          <label>合計金額<input id="totalField" type="number" inputmode="numeric" min="0" placeholder="0" /></label>
+        </div>
+        <div class="section-title"><h2>商品と分類</h2><button id="addItemBtn" class="text-btn">＋追加</button></div>
+        <div class="classification-note"><div><strong>商品ごとに自動分類</strong><span>ここで修正した分類は、保存すると次回から学習されます</span></div></div>
+        <div class="items-head" aria-hidden="true"><span>商品名</span><span>金額</span></div>
+          <div id="itemsEditor" class="items-editor"></div>
+        <div id="sumCheck" class="sum-check hidden"></div>
+          <details id="taxPanel" class="tax-panel hidden"></details>
+        <details class="raw-box"><summary>OCR原文を確認</summary><pre id="rawText"></pre><details class="ocr-diag"><summary>診断情報（読み取りの詳細）</summary><pre id="ocrDiag"></pre></details></details>
+        <button id="addPageBtn" type="button" class="secondary full add-page-btn">＋ 続きを撮って追加</button>
+        <p class="hint muted add-page-hint">長いレシートは、続きの部分を撮って1件にまとめられます</p>
+        <button id="saveReceiptBtn" class="primary full">保存</button>
+      </section>
+
+      <section id="calendarView" class="view" aria-label="カレンダー">
+        <div class="calendar-head">
+          <button id="prevMonth" class="ghost">‹</button>
+          <h2 id="calendarTitle"></h2>
+          <button id="nextMonth" class="ghost">›</button>
+        </div>
+        <div class="weekdays"><span>日</span><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span>土</span></div>
+        <div id="calendarGrid" class="calendar-grid"></div>
+        <section class="section-block">
+          <div class="section-title"><h2 id="selectedDateTitle">日付を選択</h2><span id="selectedDateTotal"></span></div>
+          <div id="dayList" class="list"></div>
+          <div id="expenseEditPanel" class="expense-edit-panel hidden" aria-live="polite">
+            <div class="section-title edit-title"><h2 id="expenseEditTitle">記録を編集</h2><button id="cancelExpenseEditBtn" type="button" class="text-btn">閉じる</button></div>
+            <p class="muted edit-help">ここでの変更はこの記録だけに反映されます。自動分類の学習内容は変わりません。</p>
+            <div id="expenseEditItems" class="expense-edit-items"></div>
+            <button id="saveExpenseEditBtn" type="button" class="primary full">変更を保存</button>
+          </div>
+        </section>
+      </section>
+
+
+      <section id="graphView" class="view" aria-label="グラフ">
+        <div class="graph-top">
+          <div>
+            <p class="eyebrow">SPENDING TRENDS</p>
+            <h2>支出グラフ</h2>
+          </div>
+          <div class="graph-tabs" role="tablist" aria-label="集計単位">
+            <button type="button" data-graph-mode="monthly" class="active">月別</button>
+            <button type="button" data-graph-mode="yearly">年別</button>
+          </div>
+        </div>
+
+        <div class="chart-period-head">
+          <button id="graphPrev" class="ghost" type="button" aria-label="前の期間">‹</button>
+          <h3 id="graphPeriodLabel"></h3>
+          <button id="graphNext" class="ghost" type="button" aria-label="次の期間">›</button>
+        </div>
+
+        <div class="graph-summary">
+          <div><span>合計</span><strong id="graphTotal">¥0</strong></div>
+          <div><span id="graphAverageLabel">月平均</span><strong id="graphAverage">¥0</strong></div>
+          <div><span>最大</span><strong id="graphMax">¥0</strong></div>
+        </div>
+
+        <section class="chart-card" aria-label="支出推移">
+          <div id="chartEmpty" class="chart-empty hidden">この期間の支出はまだありません</div>
+          <svg id="expenseChart" class="expense-chart" viewBox="0 0 720 320" role="img" aria-labelledby="chartTitle chartDesc">
+            <title id="chartTitle">支出グラフ</title>
+            <desc id="chartDesc">選択した期間の支出推移</desc>
+          </svg>
+          <div id="chartSelection" class="chart-selection">グラフをタップすると金額を確認できます</div>
+        </section>
+
+        <section class="section-block">
+          <div class="section-title"><h2>カテゴリ内訳</h2><span id="graphCategoryLabel" class="muted"></span></div>
+          <div id="graphCategoryBars" class="category-bars"></div>
+          <p id="graphCategoryHint" class="muted graph-hint"></p>
+        </section>
+      </section>
+
+      <section id="manualView" class="view" aria-label="手入力">
+        <div class="section-title"><h2>手入力</h2></div>
+        <form id="manualForm" class="form-card">
+          <label>日付<input id="manualDate" type="date" min="2000-01-01" max="2099-12-31" required /></label>
+          <label>商品名・メモ<input id="manualStore" maxlength="100" type="text" placeholder="例：昼食・駐車場" /></label>
+          <label>カテゴリ<select id="manualCategory"><option>食費</option><option>日用品</option><option>外食</option><option>交通</option><option>娯楽</option><option>医療</option><option>美容</option><option>衣類</option><option>ペット</option><option>OG</option><option>未分類</option></select></label>
+          <label>金額<input id="manualAmount" type="number" inputmode="numeric" min="1" required /></label>
+          <button class="primary full" type="submit">保存</button>
+        </form>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="メインメニュー">
+      <button data-view="homeView" class="active"><span>⌂</span>ホーム</button>
+      <button data-view="calendarView"><span>▦</span>カレンダー</button>
+      <button data-view="scanView" class="scan-nav"><span>＋</span>レシート</button>
+      <button data-view="graphView"><span>⌁</span>グラフ</button>
+      <button data-view="manualView"><span>✎</span>手入力</button>
+    </nav>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="confirmDialog" class="confirm-dialog hidden" role="dialog" aria-modal="true" aria-labelledby="confirmMessage"><div class="confirm-box"><p id="confirmMessage"></p><div class="confirm-actions"><button id="confirmCancel" type="button" class="secondary">キャンセル</button><button id="confirmOk" type="button" class="primary">OK</button></div></div></div>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@7.0.0/dist/tesseract.min.js" integrity="sha384-2BQ3U3OdKOb0Uczxqr41I9UvZkzr4V9Hv8uSzMMZAlmhsFClvdZX5wi5fDCzG+tM" crossorigin="anonymous"></script>
+  <div id="liveScan" class="live-scan hidden" role="dialog" aria-modal="true" aria-label="カメラで読み取り">
+    <video id="liveVideo" playsinline muted autoplay></video>
+    <div id="liveGuide" class="live-guide" aria-hidden="true"></div>
+    <div class="live-top"><button id="liveCloseBtn" type="button" class="live-close">閉じる</button></div>
+    <div class="live-bottom"><p id="liveStatus" aria-live="polite">カメラを起動しています…</p><button id="liveShutterBtn" type="button" class="live-shutter" aria-label="今すぐ撮る"></button></div>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>
