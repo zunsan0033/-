@@ -1,0 +1,68 @@
+{
+  "title": "static_checks",
+  "pass": 12,
+  "fail": 0,
+  "skipped": 0,
+  "results": [
+    {
+      "name": "ZIP / folder layout: index.html and the app files at the top",
+      "ok": true,
+      "ms": 1
+    },
+    {
+      "name": "version 1.11.0 in the five places (APP_VERSION / meta / #appVersion / --kakeibo-version / APP_CACHE)",
+      "ok": true,
+      "ms": 5
+    },
+    {
+      "name": "kept: ENGINE_CACHE, IndexedDB name / version / store, backup format 1",
+      "ok": true,
+      "ms": 11
+    },
+    {
+      "name": "README: v1.11.0 first, the backup note, history kept",
+      "ok": true,
+      "ms": 0
+    },
+    {
+      "name": "same file list as v1.10.20",
+      "ok": true,
+      "ms": 1
+    },
+    {
+      "name": "unchanged files are byte-identical",
+      "ok": true,
+      "ms": 0
+    },
+    {
+      "name": "CSP and the external script tag are unchanged",
+      "ok": true,
+      "ms": 1
+    },
+    {
+      "name": "app.js: only the version, the test hook, the food budget block and its listeners",
+      "ok": true,
+      "ms": 7
+    },
+    {
+      "name": "index.html: only the version and the new card",
+      "ok": true,
+      "ms": 4
+    },
+    {
+      "name": "styles.css: the old rules are kept as they were, the new rules are only appended",
+      "ok": true,
+      "ms": 4
+    },
+    {
+      "name": "sw.js: only the cache name and the comment at the top",
+      "ok": true,
+      "ms": 4
+    },
+    {
+      "name": "README.txt: v1.11.0 added at the top, nothing removed",
+      "ok": true,
+      "ms": 4
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "title": "unit_food_budget",
+  "pass": 17,
+  "fail": 0,
+  "skipped": 0,
+  "results": [
+    {
+      "name": "version is 1.11.0 and the helpers are exposed",
+      "ok": true,
+      "ms": 4
+    },
+    {
+      "name": "未設定: no budget / invalid budgets give set:false (used is still counted)",
+      "ok": true,
+      "ms": 30
+    },
+    {
+      "name": "設定済み: remaining, percent, days left and per day (floor)",
+      "ok": true,
+      "ms": 3
+    },
+    {
+      "name": "80% は warm、79% は ok、100% ちょうどは warm（超過ではない）",
+      "ok": true,
+      "ms": 5
+    },
+    {
+      "name": "超過: overBy, no per-day amount, bar stops at 100%",
+      "ok": true,
+      "ms": 2
+    },
+    {
+      "name": "残りがちょうど0: remaining 0, per day ¥0, not over",
+      "ok": true,
+      "ms": 2
+    },
+    {
+      "name": "税を按分した記録: the 食費 share of the total (with tax) as in the bars",
+      "ok": true,
+      "ms": 6
+    },
+    {
+      "name": "食費と外食が混ざったレシート: 外食 is not counted",
+      "ok": true,
+      "ms": 2
+    },
+    {
+      "name": "前月・翌月・前年の記録は含まない / 今月の未来の日付は含む",
+      "ok": true,
+      "ms": 2
+    },
+    {
+      "name": "月末と月初の残り日数 (today included)",
+      "ok": true,
+      "ms": 21
+    },
+    {
+      "name": "used + remaining = budget and food = bars value for random data (300 cases)",
+      "ok": true,
+      "ms": 8
+    },
+    {
+      "name": "records without a date or of another shape do not break the calculation",
+      "ok": true,
+      "ms": 5
+    },
+    {
+      "name": "不正な入力値: parseFoodBudgetInput",
+      "ok": true,
+      "ms": 2
+    },
+    {
+      "name": "壊れたJSON・範囲外の値は未設定 (parseFoodBudget)",
+      "ok": true,
+      "ms": 3
+    },
+    {
+      "name": "save / load / clear through localStorage (key and JSON shape)",
+      "ok": true,
+      "ms": 3
+    },
+    {
+      "name": "localStorage の例外: load → unset, save / clear → false (nothing thrown)",
+      "ok": true,
+      "ms": 2
+    },
+    {
+      "name": "no page errors while testing",
+      "ok": true,
+      "ms": 0
+    }
+  ]
+}

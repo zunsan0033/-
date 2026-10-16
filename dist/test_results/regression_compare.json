@@ -1,0 +1,83 @@
+{
+  "title": "regression_compare",
+  "pass": 15,
+  "fail": 0,
+  "skipped": 0,
+  "results": [
+    {
+      "name": "versions under test",
+      "ok": true,
+      "ms": 3
+    },
+    {
+      "name": "the test hook keeps every name of v1.10.20",
+      "ok": true,
+      "ms": 4
+    },
+    {
+      "name": "ホーム (without the new card): HTML, inputs and computed styles; bottom tabs",
+      "ok": true,
+      "ms": 509
+    },
+    {
+      "name": "the budget does not change anything else on ホーム",
+      "ok": true,
+      "ms": 492
+    },
+    {
+      "name": "pure functions give the same results (reading receipt text, classifying, totals, backup check)",
+      "ok": true,
+      "ms": 92
+    },
+    {
+      "name": "レシートの文字を読み取って確認・保存: 外税",
+      "ok": true,
+      "ms": 781
+    },
+    {
+      "name": "レシートの文字を読み取って確認・保存: 内税と値引",
+      "ok": true,
+      "ms": 666
+    },
+    {
+      "name": "レシートの文字を読み取って確認・保存: 2枚と取消",
+      "ok": true,
+      "ms": 709
+    },
+    {
+      "name": "レシートの文字を読み取って確認・保存: ガソリン",
+      "ok": true,
+      "ms": 554
+    },
+    {
+      "name": "レシートの文字を読み取って確認・保存: 外食",
+      "ok": true,
+      "ms": 630
+    },
+    {
+      "name": "手入力 (食費・外食) and the screens after it",
+      "ok": true,
+      "ms": 447
+    },
+    {
+      "name": "編集 (a saved receipt from 最近の支出) and 削除",
+      "ok": true,
+      "ms": 577
+    },
+    {
+      "name": "カレンダー, グラフ (月別・年別), レシート screen with learning",
+      "ok": true,
+      "ms": 818
+    },
+    {
+      "name": "バックアップの書き出し: same JSON except version / exportedAt",
+      "ok": true,
+      "ms": 173
+    },
+    {
+      "name": "no page errors in either version",
+      "ok": true,
+      "ms": 0
+    }
+  ]
+}

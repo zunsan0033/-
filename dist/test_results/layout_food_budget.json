@@ -1,0 +1,148 @@
+{
+  "title": "layout_food_budget",
+  "pass": 28,
+  "fail": 0,
+  "skipped": 0,
+  "results": [
+    {
+      "name": "320px unset: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 431
+    },
+    {
+      "name": "320px normal: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 354
+    },
+    {
+      "name": "320px budget-10m-unused: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 347
+    },
+    {
+      "name": "320px budget-10m-warm: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 378
+    },
+    {
+      "name": "320px over-huge: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 412
+    },
+    {
+      "name": "320px editor-10m: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 413
+    },
+    {
+      "name": "320px editor-error: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 470
+    },
+    {
+      "name": "375px unset: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 344
+    },
+    {
+      "name": "375px normal: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 515
+    },
+    {
+      "name": "375px budget-10m-unused: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 376
+    },
+    {
+      "name": "375px budget-10m-warm: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 392
+    },
+    {
+      "name": "375px over-huge: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 400
+    },
+    {
+      "name": "375px editor-10m: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 433
+    },
+    {
+      "name": "375px editor-error: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 428
+    },
+    {
+      "name": "390px unset: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 241
+    },
+    {
+      "name": "390px normal: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 247
+    },
+    {
+      "name": "390px budget-10m-unused: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 248
+    },
+    {
+      "name": "390px budget-10m-warm: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 264
+    },
+    {
+      "name": "390px over-huge: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 273
+    },
+    {
+      "name": "390px editor-10m: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 318
+    },
+    {
+      "name": "390px editor-error: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 334
+    },
+    {
+      "name": "430px unset: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 220
+    },
+    {
+      "name": "430px normal: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 245
+    },
+    {
+      "name": "430px budget-10m-unused: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 243
+    },
+    {
+      "name": "430px budget-10m-warm: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 249
+    },
+    {
+      "name": "430px over-huge: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 263
+    },
+    {
+      "name": "430px editor-10m: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 341
+    },
+    {
+      "name": "430px editor-error: no horizontal scroll, the card holds its contents",
+      "ok": true,
+      "ms": 336
+    }
+  ]
+}

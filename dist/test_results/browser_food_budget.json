@@ -1,0 +1,133 @@
+{
+  "title": "browser_food_budget",
+  "pass": 25,
+  "fail": 0,
+  "skipped": 0,
+  "results": [
+    {
+      "name": "placement: between hero-card and カテゴリ別, existing order unchanged",
+      "ok": true,
+      "ms": 2
+    },
+    {
+      "name": "予算が未設定: only the explanation and 予算を設定",
+      "ok": true,
+      "ms": 10
+    },
+    {
+      "name": "editor: number field (inputmode numeric), 保存・キャンセル, no 予算を解除 while unset",
+      "ok": true,
+      "ms": 58
+    },
+    {
+      "name": "invalid input: error in the card, nothing saved, no alert/prompt",
+      "ok": true,
+      "ms": 313
+    },
+    {
+      "name": "キャンセル: nothing saved, the card is back",
+      "ok": true,
+      "ms": 40
+    },
+    {
+      "name": "予算を設定すると表示される (30,000円, no records yet)",
+      "ok": true,
+      "ms": 111
+    },
+    {
+      "name": "setting the budget writes no expense (IndexedDB unchanged)",
+      "ok": true,
+      "ms": 2
+    },
+    {
+      "name": "手入力で食費を足すと残りが減る",
+      "ok": true,
+      "ms": 287
+    },
+    {
+      "name": "外食を足しても変わらない",
+      "ok": true,
+      "ms": 278
+    },
+    {
+      "name": "カテゴリ別の食費の金額と一致する (receipts with tax and discounts, a future day this month)",
+      "ok": true,
+      "ms": 53
+    },
+    {
+      "name": "記録を消すと戻る (delete from 最近の支出)",
+      "ok": true,
+      "ms": 367
+    },
+    {
+      "name": "80%以上は --warm、超過したら --danger と「¥xx オーバー」(1日あたりは出さない)",
+      "ok": true,
+      "ms": 383
+    },
+    {
+      "name": "変更: the editor shows the current amount and 予算を解除",
+      "ok": true,
+      "ms": 67
+    },
+    {
+      "name": "the editor survives a redraw of ホーム (draft kept)",
+      "ok": true,
+      "ms": 118
+    },
+    {
+      "name": "再読み込みしても予算が残る",
+      "ok": true,
+      "ms": 118
+    },
+    {
+      "name": "予算を解除できる (askConfirm; キャンセル keeps it)",
+      "ok": true,
+      "ms": 167
+    },
+    {
+      "name": "budget changes never touched the expenses (only the test seeds / manual entries / delete did)",
+      "ok": true,
+      "ms": 7
+    },
+    {
+      "name": "書き込みに失敗: toast error and the previous state stays",
+      "ok": true,
+      "ms": 299
+    },
+    {
+      "name": "a broken stored value is shown as 未設定",
+      "ok": true,
+      "ms": 572
+    },
+    {
+      "name": "backup: the budget is not exported; restore leaves it as it is",
+      "ok": true,
+      "ms": 525
+    },
+    {
+      "name": "another tab sets or clears the budget: this card follows (storage event)",
+      "ok": true,
+      "ms": 218
+    },
+    {
+      "name": "no page errors and no native dialogs in the session",
+      "ok": true,
+      "ms": 0
+    },
+    {
+      "name": "時計をずらして月をまたぐと新しい月に切り替わる (midnight timer, app in front)",
+      "ok": true,
+      "ms": 301
+    },
+    {
+      "name": "月をまたぐ (the app comes back to the front: focus / pageshow) and 年をまたぐ",
+      "ok": true,
+      "ms": 288
+    },
+    {
+      "name": "another view is in front when the month changes: ホーム shows the new month when opened",
+      "ok": true,
+      "ms": 363
+    }
+  ]
+}
