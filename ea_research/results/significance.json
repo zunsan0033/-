@@ -1,0 +1,20 @@
+{
+ "n_trials": 34,
+ "sr_star_annual": 0.4420853286847135,
+ "dsr_is": 0.7695300829711793,
+ "oos_sets": [
+  "SPX_OOS",
+  "CFD"
+ ],
+ "oos_sharpe": 0.48283316275854804,
+ "oos_days": 3329,
+ "oos_t": 1.754905433309837,
+ "oos_psr": 0.9630003580814653,
+ "ndq_sharpe": 0.2861194940081668,
+ "ndq_t": 1.278422297096567,
+ "corr_spx_ndq": 0.7297039739482394,
+ "port_spx_ndq_sharpe": 0.43950350634923635,
+ "parity_sim_entries": 307,
+ "parity_matched": 307,
+ "parity_emulator_only": 0
+}
