@@ -81,6 +81,7 @@ void ExportSymbol(const string sym)
    if(chunk < 86400)
       chunk = 86400;
    long     total  = 0;
+   int      failed = 0;
    datetime first  = 0, last = 0;
    // skip the years before the server's first bar of this symbol (avoids long retries on empty ranges)
    datetime start  = InpFrom;
@@ -95,16 +96,17 @@ void ExportSymbol(const string sym)
          t2 = to;
       MqlRates r[];
       int got = -1;
-      // the terminal downloads missing history from the server on request: retry while it synchronises
-      for(int attempt = 0; attempt < 40 && got < 0 && !IsStopped(); attempt++)
+      // the terminal downloads missing history from the server on request: retry (up to ~60 s) while it synchronises
+      for(int attempt = 0; attempt < 120 && got < 0 && !IsStopped(); attempt++)
         {
          ResetLastError();
          got = CopyRates(sym, InpTimeframe, t, t2, r);
          if(got < 0)
-            Sleep(250);
+            Sleep(500);
         }
       if(got < 0)
         {
+         failed++;
          PrintFormat("ExportBars: %s no bars for %s - %s (error %d)", sym, TimeToString(t), TimeToString(t2), GetLastError());
          continue;
         }
@@ -125,8 +127,8 @@ void ExportSymbol(const string sym)
       Comment(StringFormat("ExportBars  %s %s  up to %s  bars=%I64d", sym, TfName(), TimeToString(t2, TIME_DATE), total));
      }
    FileClose(h);
-   PrintFormat("ExportBars: %s %s -> MQL5\\Files\\%s  bars=%I64d  first=%s  last=%s", sym, TfName(), fname, total,
-               TimeToString(first), TimeToString(last));
+   PrintFormat("ExportBars: %s %s -> MQL5\\Files\\%s  bars=%I64d  first=%s  last=%s  failed_chunks=%d%s", sym, TfName(),
+               fname, total, TimeToString(first), TimeToString(last), failed, (failed > 0 ? "  (run the script again)" : ""));
   }
 
 //+------------------------------------------------------------------+

@@ -13,6 +13,7 @@
 | `research/` | 検証コード（Python）。`run_all.py` で全結果を再現 |
 | `CANDIDATES.md` | 次に検証するロジック候補 10 件（ルールを事前に固定） |
 | `tools/ExportBars.mq5` | MT5 から過去データを CSV に書き出すスクリプト（読み取り専用） |
+| `DATA_EXPORT_GUIDE.md` | 上位 3 候補の検証用データを書き出す手順（あなたの作業） |
 
 ## ロジック（日足が確定するたびに 1 回判定）
 
