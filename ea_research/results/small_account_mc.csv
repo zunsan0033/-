@@ -1,0 +1,13 @@
+scenario,config,horizon,median,p10,p90,P_loss,P_double,P_below_100k,P_below_75k
+same edge as history,D2 IR US500 A+B + IM,1y,"187,536","151,709","229,482",9%,0%,0%,0%
+same edge as history,D2 IR US500 A+B + IM,3y,"274,423","196,264","371,692",2%,36%,1%,0%
+same edge as history,D3 + IR US100 A (recommended),1y,"229,273","138,937","324,496",13%,16%,1%,0%
+same edge as history,D3 + IR US100 A (recommended),3y,"445,828","262,446","675,510",3%,85%,3%,0%
+same edge as history,D5 D3 x1.5,1y,"238,370","136,653","353,581",17%,23%,2%,0%
+same edge as history,D5 D3 x1.5,3y,"474,691","250,116","881,662",4%,84%,3%,0%
+edge halved,D2 IR US500 A+B + IM,1y,"165,899","126,533","210,837",29%,0%,2%,0%
+edge halved,D2 IR US500 A+B + IM,3y,"206,063","113,195","288,742",19%,8%,10%,1%
+edge halved,D3 + IR US100 A (recommended),1y,"172,987","118,277","259,742",38%,4%,3%,0%
+edge halved,D3 + IR US100 A (recommended),3y,"252,744","106,311","444,652",22%,38%,14%,1%
+edge halved,D5 D3 x1.5,1y,"165,603","113,163","265,356",44%,7%,6%,0%
+edge halved,D5 D3 x1.5,3y,"232,119","98,292","464,304",32%,34%,21%,2%
