@@ -4,7 +4,7 @@
 //|  CSV files (same columns as MT5's own "Bars > Export").          |
 //|                                                                  |
 //|  Output : <data folder>/MQL5/Files/<symbol>_<TF>.csv             |
-//|           <data folder>/MQL5/Files/export_info.txt               |
+//|           <data folder>/MQL5/Files/export_info_<TF>.txt          |
 //|           (File > Open Data Folder shows the data folder)        |
 //|  Read-only: this script never sends, modifies or closes orders.  |
 //|                                                                  |
@@ -135,7 +135,7 @@ void ExportSymbol(const string sym)
 //+------------------------------------------------------------------+
 void WriteInfo(const string &syms[], int n, long maxbars)
   {
-   int h = FileOpen("export_info.txt", FILE_WRITE | FILE_TXT | FILE_ANSI);
+   int h = FileOpen("export_info_" + TfName() + ".txt", FILE_WRITE | FILE_TXT | FILE_ANSI);
    if(h == INVALID_HANDLE)
       return;
    FileWriteString(h, "company=" + TerminalInfoString(TERMINAL_COMPANY) + "\r\n");
