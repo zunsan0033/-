@@ -67,12 +67,15 @@ def session_arrays(d, tz, s0, s1):
     return piv, n
 
 
-def run(d, sym, lookback=14, target=0.02, max_lev=4.0, slip_bp=0.5, cost_scale=1.0):
+def run(d, sym, lookback=14, target=0.02, max_lev=4.0, slip_bp=0.5, cost_scale=1.0, stop_pct=0.0):
+    """Simulate the rules on complete sessions. stop_pct > 0 adds a protective stop at entry*(1 -/+ stop_pct),
+    checked on every M5 bar after the entry bar (fill at the stop, or at the bar open if it gapped through)."""
     tz, s0, s1 = SESSIONS[sym]
     P, n = session_arrays(d, tz, s0, s1)
     dates = pd.to_datetime(P['c'].index)
     C = P['c'].values; O = P['o'][0].values
-    typ = (P['h'].values + P['l'].values + C) / 3.0
+    Hh = P['h'].values; Ll = P['l'].values; Ob = P['o'].values
+    typ = (Hh + Ll + C) / 3.0
     tv = np.maximum(P['tv'].values, 1.0)
     vwap = np.cumsum(typ * tv, axis=1) / np.cumsum(tv, axis=1)
     pt = point_size(np.concatenate([C[:, -1], O]))
@@ -83,6 +86,7 @@ def run(d, sym, lookback=14, target=0.02, max_lev=4.0, slip_bp=0.5, cost_scale=1
     close_px = C[:, -1]
     dret = np.r_[np.nan, close_px[1:] / close_px[:-1] - 1]
     dec_k = [(t - s0) // 5 - 1 for t in range(s0 + 30, s1 - 29, 30)]     # bar whose close is the decision time
+    dec_set = set(dec_k)
     daily = np.zeros(len(dates)); lev_used = np.zeros(len(dates)); ntr = np.zeros(len(dates), dtype=int)
     trades = []
     for i in range(lookback + 1, len(dates)):
@@ -93,30 +97,49 @@ def run(d, sym, lookback=14, target=0.02, max_lev=4.0, slip_bp=0.5, cost_scale=1
         lev = min(max_lev, target / vol14)
         o = O[i]; pc = close_px[i - 1]
         ub = max(o, pc) * (1 + sigma); lb = min(o, pc) * (1 - sigma)
-        pos, entry, pnl = 0, 0.0, 0.0
-        for k in dec_k:
+        pos, entry, pnl, ek = 0, 0.0, 0.0, -1
+
+        def close_trade(k, px, reason):
+            nonlocal pos, pnl
+            cost = cost_scale * (spr_bp[i, k] / 2 + slip_bp) / 1e4
+            r = (px / entry - 1) if pos == 1 else (1 - px / entry)
+            pnl += r - cost
+            trades.append((dates[i], pos, r - 2 * cost, ek, k, entry, px, reason))
+            pos = 0
+
+        for k in range(dec_k[0], n):
+            if pos != 0 and stop_pct > 0 and k > ek:
+                if pos == 1:
+                    sp = entry * (1 - stop_pct)
+                    if Ll[i, k] <= sp:
+                        ob = Ob[i, k]
+                        close_trade(k, ob if (np.isfinite(ob) and ob < sp) else sp, 'stop')
+                else:
+                    sp = entry * (1 + stop_pct)
+                    if Hh[i, k] >= sp:
+                        ob = Ob[i, k]
+                        close_trade(k, ob if (np.isfinite(ob) and ob > sp) else sp, 'stop')
+            if k not in dec_set:
+                continue
             p = C[i, k]
             # state at each check: long above max(upper, VWAP), short below min(lower, VWAP), otherwise flat
             # (the exit rule of the paper is exactly the complement of this entry rule, so nothing churns)
             want = 1 if p > max(ub[k], vwap[i, k]) else (-1 if p < min(lb[k], vwap[i, k]) else 0)
             if want == pos:
                 continue
-            cost = cost_scale * (spr_bp[i, k] / 2 + slip_bp) / 1e4
             if pos != 0:
-                r = (p / entry - 1) if pos == 1 else (1 - p / entry)
-                pnl += r - cost; trades.append((dates[i], pos, r - 2 * cost))
+                close_trade(k, p, 'rule')
             if want != 0:
-                entry = p; pnl -= cost; ntr[i] += 1
-            pos = want
+                cost = cost_scale * (spr_bp[i, k] / 2 + slip_bp) / 1e4
+                entry, ek = p, k
+                pnl -= cost; ntr[i] += 1
+                pos = want
         if pos != 0:
-            p = C[i, n - 1]
-            cost = cost_scale * (spr_bp[i, n - 1] / 2 + slip_bp) / 1e4
-            r = (p / entry - 1) if pos == 1 else (1 - p / entry)
-            pnl += r - cost; trades.append((dates[i], pos, r - 2 * cost))
+            close_trade(n - 1, C[i, n - 1], 'close')
         daily[i] = lev * pnl
         lev_used[i] = lev
     out = pd.DataFrame({'ret': daily, 'lev': lev_used, 'trades': ntr}, index=dates).iloc[lookback + 1:]
-    tr = pd.DataFrame(trades, columns=['date', 'side', 'ret'])
+    tr = pd.DataFrame(trades, columns=['date', 'side', 'ret', 'ek', 'xk', 'entry', 'exit', 'reason'])
     return out, tr, med_spr_bp
 
 

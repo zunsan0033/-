@@ -10,14 +10,15 @@
 //|  at signalClose - 3*ATR(10). No martingale / grid / averaging.   |
 //+------------------------------------------------------------------+
 #property copyright "IndexReversion research build"
-#property version   "1.00"
+#property version   "1.10"
 #property strict
 #property description "Long-only daily mean reversion (IBS + RSI2) for index CFDs."
 
 enum ENUM_SIZING
   {
-   SIZING_RISK_PERCENT = 0,   // Risk % of equity per rule (to the stop)
-   SIZING_FIXED_LOTS   = 1    // Fixed lots per rule
+   SIZING_NOTIONAL     = 0,   // Notional = x times equity per rule (research setting)
+   SIZING_RISK_PERCENT = 1,   // Risk % of equity per rule (to the stop)
+   SIZING_FIXED_LOTS   = 2    // Fixed lots per rule
   };
 
 //--- Signals (defaults fixed from published research; do not optimise)
@@ -30,8 +31,9 @@ input int    InpTrendMaPeriod = 200;    // Rule B: trend filter Close > SMA(n)
 input int    InpExitMaPeriod  = 5;      // Rule B: exit when Close > SMA(n)
 input int    InpMaxHoldBarsB  = 10;     // Rule B: maximum holding bars
 //--- Risk
-input ENUM_SIZING InpSizing   = SIZING_RISK_PERCENT; // Position sizing mode
-input double InpRiskPercent   = 1.0;    // Risk % of equity per rule if the stop is hit
+input ENUM_SIZING InpSizing   = SIZING_NOTIONAL; // Position sizing mode
+input double InpNotionalMult  = 0.5;    // Notional per rule as a multiple of equity (notional mode)
+input double InpRiskPercent   = 1.0;    // Risk % of equity per rule if the stop is hit (risk mode)
 input double InpFixedLots     = 0.10;   // Lots per rule (fixed mode)
 input int    InpAtrPeriod     = 10;     // ATR period (stop distance)
 input double InpStopAtrMult   = 3.0;    // Protective stop = signal close - k*ATR
@@ -58,6 +60,7 @@ int OnInit()
    if(InpIbsThreshold <= 0.0 || InpIbsThreshold >= 1.0 || InpRsiPeriod < 1 || InpTrendMaPeriod < 2 ||
       InpExitMaPeriod < 1 || InpAtrPeriod < 1 || InpStopAtrMult <= 0.0 || InpMaxHoldBarsB < 1 ||
       InpMaxWaitMinutes < 1 ||
+      (InpSizing == SIZING_NOTIONAL && (InpNotionalMult <= 0.0 || InpNotionalMult > 10.0)) ||
       (InpSizing == SIZING_RISK_PERCENT && (InpRiskPercent <= 0.0 || InpRiskPercent > 10.0)) ||
       (InpSizing == SIZING_FIXED_LOTS && InpFixedLots <= 0.0))
      {
@@ -275,6 +278,16 @@ double NormalizeLots(double lots)
    return(NormalizeDouble(lots, 8));
   }
 
+// value of 1 lot at this price (account currency), from tick value
+double NotionalPerLot(double price)
+  {
+   double tv = MarketInfo(Symbol(), MODE_TICKVALUE);
+   double ts = MarketInfo(Symbol(), MODE_TICKSIZE);
+   if(tv <= 0.0 || ts <= 0.0)
+      return(0.0);
+   return(price / ts * tv);
+  }
+
 // money lost by 1 lot between entry and sl (account currency), from tick value
 double LossPerLot(double entry, double sl)
   {
@@ -298,6 +311,16 @@ bool OpenLong(int magic, double sl, string cmt)
    double lots;
    if(InpSizing == SIZING_FIXED_LOTS)
       lots = InpFixedLots;
+   else if(InpSizing == SIZING_NOTIONAL)
+     {
+      double npl = NotionalPerLot(Ask);
+      if(npl <= 0.0)
+        {
+         Print("IndexReversion_EA: cannot compute notional per lot; entry skipped");
+         return(true);
+        }
+      lots = AccountEquity() * InpNotionalMult / npl;
+     }
    else
      {
       double lpl = LossPerLot(Ask, sl);
