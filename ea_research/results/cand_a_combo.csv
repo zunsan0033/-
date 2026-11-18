@@ -1,0 +1,9 @@
+series,period,sharpe,cagr,maxdd
+EA alone,full,0.7857,0.0480,-0.0985
+EA alone,post-publication,1.6651,0.1058,-0.0390
+A US500 alone,full,0.0714,0.0001,-0.3800
+A US500 alone,post-publication,-0.6179,-0.0981,-0.3800
+"EA + A(US500), equal risk",full,0.6248,0.0376,-0.1048
+"EA + A(US500), equal risk",post-publication,0.6819,0.0442,-0.0435
+"EA + A(US500+US100), equal risk",full,0.8803,0.0542,-0.0792
+"EA + A(US500+US100), equal risk",post-publication,1.1121,0.0777,-0.0480

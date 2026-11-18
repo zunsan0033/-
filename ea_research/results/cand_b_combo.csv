@@ -1,0 +1,4 @@
+series,sharpe,cagr,vol,maxdd
+EA US500 alone,0.7961,0.0473,0.0603,-0.0985
+TSMOM-12 alone,-0.0958,-0.0316,0.1750,-0.5534
+"EA + TSMOM, equal risk",0.4693,0.0203,0.0450,-0.1162

@@ -14,6 +14,7 @@
 | `CANDIDATES.md` | 次に検証するロジック候補 10 件（ルールを事前に固定） |
 | `tools/ExportBars.mq5` | MT5 から過去データを CSV に書き出すスクリプト（読み取り専用） |
 | `DATA_EXPORT_GUIDE.md` | 上位 3 候補の検証用データを書き出す手順（あなたの作業） |
+| `research/cand_a.py`・`cand_b.py`・`cand_c.py` | 上位 3 候補の検証コード（MT5 から書き出した CSV を読む。結果は REPORT.md 第 8 章） |
 
 ## ロジック（日足が確定するたびに 1 回判定）
 
