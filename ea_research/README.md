@@ -8,6 +8,7 @@
 |---|---|
 | `mql5/IndexReversion_EA.mq5` | MT5 用 EA（両建て口座が必要） |
 | `mql4/IndexReversion_EA.mq4` | MT4 用 EA（同じロジック） |
+| `mql5/IndexPortfolio_EA.mq5` | **3 つの戦略を 1 本にまとめた EA**（1 枚のチャートに付けるだけ。MT5。下の別章） |
 | `mql5/IntradayMomentum_EA.mq5` | 日中モメンタム EA（NASDAQ100 用、MT5。下の別章） |
 | `REPORT.md` | 研究レポート（仮説、検証手順、結果、限界） |
 | `results/` | レポートの表とグラフの元データ（CSV・JSON・PNG） |
@@ -70,6 +71,41 @@ MT4 は `IndexReversion_EA.mq4` を `MQL4/Experts/` にコピーし、同じ手�
 - v1.10 から、初期値は「資産の 0.5 倍/ルール」です。2 ルールとも持つと、建玉は最大で資産の 1 倍になります。
 - 初期値の場合、利用中の業者の S&P500（2015〜2026 年）では年 5.0%、最大 DD −9.8% でした。
 - 倍率を上げると、リターンも最大 DD もほぼ比例して増えます。
+
+## IndexPortfolio_EA：3 つの戦略を 1 本で動かす EA（MT5）
+
+次の 3 つを、1 枚のチャートに付けるだけで同時に動かします。中身のロジックとマジックナンバーは、単体の EA と同じです。
+
+| モジュール | 戦略 | 銘柄 |
+|---|---|---|
+| 1 | IndexReversion（日足の逆張り） | S&P500（初期値 US500Cash） |
+| 2 | IndexReversion（日足の逆張り） | NASDAQ100（初期値 US100Cash） |
+| 3 | IntradayMomentum（日中モメンタム。建玉は研究の 0.5 倍が初期値） | NASDAQ100（初期値 US100Cash） |
+
+**使い方**
+1. `IndexPortfolio_EA.mq5` を `MQL5/Experts/` にコピーし、コンパイルします（F7）。
+2. **US100Cash のチャート 1 枚**に付けます。時間足は何でもかまいません。US500Cash の売買も、この 1 枚から行います。
+3. 銘柄名が業者で違う場合は、`InpSymbolSPX` と `InpSymbolNDX` を気配値表示の名前に合わせます。
+4. 使わないモジュールは、`InpRunReversionSPX`・`InpRunReversionNDX`・`InpRunMomentumNDX` を false にします。
+5. **単体の IndexReversion_EA・IntradayMomentum_EA とは同時に動かさないでください。** マジックナンバーが同じなので、同じポジションを二重に管理してしまいます。単体の EA を外してから付けてください。今あるポジションは、そのまま引き継げます。
+
+**ストラテジーテスター**
+- 銘柄は **US100Cash** を選びます（US500Cash のデータは、テスターが自動で読み込みます）。
+- モデルは「リアルティックに基づいた全ティック」にします。
+- 初期資金は、ロットの刻みで成績がゆがまない額（例：1,000 万円）にしてください。
+
+**口座**：両建て（ヘッジング）口座が必要です。3 つを全部動かすなら、資金は 100 万円以上が目安です（最小ロットの都合）。
+
+**主な追加設定**
+
+| 名前 | 初期値 | 意味 |
+|---|---|---|
+| `InpSymbolSPX` / `InpSymbolNDX` | US500Cash / US100Cash | 業者での銘柄名 |
+| `InpRunReversionSPX` / `InpRunReversionNDX` / `InpRunMomentumNDX` | すべて true | 各モジュールを動かすか |
+| `InpExposureScale` | **0.5** | 日中モメンタムの建玉の倍率（単体 EA の初期値 1.0 の半分） |
+| `InpMaxTotalExposure` | 0 | 3 つ合計の建玉の上限（資産の何倍か。0＝なし）。これを超える分は新規に入らない |
+
+ほかのパラメータは、単体の 2 つの EA と同じ名前・同じ意味です（日中モメンタムのスプレッド上限は `InpMaxSpreadPointsIM`）。
 
 ## IntradayMomentum_EA：NASDAQ100 の日中モメンタム EA（MT5）
 
