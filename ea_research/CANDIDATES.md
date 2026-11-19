@@ -22,13 +22,17 @@ IndexReversion_EA（米国株価指数の日足逆張り）の次に検証する
 | ★ | I. 指数の夜間保有 | US500、5 分足 | 1 晩 | 株式のリターンは夜間に生じやすい | △ CFD 金利で利幅が消えやすい |
 | ★ | J. 夜間スキャルピング | EURGBP・AUDNZD など、5 分足 | 数十分 | 取引が薄い時間帯の小さな行き過ぎ | △ コストと約定品質に極めて敏感 |
 
-**検証状況（2026-11-18、詳しくは REPORT.md 第 8 章）**
+**検証状況（2026-11-19、詳しくは REPORT.md 第 8・12・13 章）**
 
 | 候補 | 判定 | 要点 |
 |---|---|---|
 | A | 条件付き | コスト前は論文どおり（S&P500 でシャープ 1.20）。コスト後に残ったのは NASDAQ100 の 0.69 だけ。今の EA とは無相関 |
 | B | 不採用 | コスト・金利後のシャープ −0.10（2015〜2026 年） |
 | C | 一部採用 | NASDAQ100 0.98、S&P500 0.83、日経平均 0.70。欧州の 3 指数は 0.10〜0.16 |
+| D | 不採用 | 第 3 弾の⑤。コスト後のシャープ −0.34。コスト前でも効果なし |
+| E | 不採用 | 第 3 弾の⑥。−1.55。欧州の午前のユーロ安はコスト前には残るが、往復コストより小さい |
+| G | 不採用 | 第 3 弾の⑦。−0.43。値上がりがコストの半分ほど |
+| I | 不採用 | 第 2 弾の④。S&P500 −0.26、NASDAQ100 −0.05 |
 
 ---
 
@@ -267,6 +271,14 @@ IndexReversion_EA（米国株価指数の日足逆張り）の次に検証する
   - コスト後のシャープが 0.3 以上で、前半と後半の両方でプラス
   - アジア時間の 1 時間あたりの平均リターンが、それ以外の時間の 1 時間あたりの平均を、前半と後半の両方で上回る（金そのものが上がっただけ、という結果を除くため）
 
+### 第 3 弾の結果（2026-11-19、詳しくは REPORT.md 第 13 章）
+
+| 候補 | 結果（コスト後のシャープ） | 判定 |
+|---|---|---|
+| ⑤ 月末の為替ヘッジ調整 | 主案（EURUSD）−0.34、副案（USDJPY）−0.38。コスト前でも効果なし | 不合格 |
+| ⑥ 為替の時間帯効果 | 3 つの組み合わせ −1.55（コスト前は 0.43）。欧州の午前のユーロ安はコスト前には残るが、往復コストより小さい | 不合格 |
+| ⑦ 金のアジア時間 | −0.43（コスト前は 0.47）。アジア時間がほかの時間を上回る点は、前半・後半とも成り立つ | 不合格 |
+
 ## 検証済みで不採用にしたもの（REPORT.md）
 
 | ロジック | 不採用の理由 |
@@ -294,7 +306,6 @@ IndexReversion_EA（米国株価指数の日足逆張り）の次に検証する
 ## 参考文献（REPORT.md にないもの）
 
 - Brunnermeier, M., Nagel, S. & Pedersen, L. H. (2008) "Carry Trades and Currency Crashes", *NBER Macroeconomics Annual* 23.
-- Caminschi, A. & Heaney, R. (2014) "Fixing a Leaky Fixing: Short-Term Market Reactions to the London PM Gold Price Fixing", *Journal of Futures Markets* 34(11).
 - Cliff, M., Cooper, M. & Gulen, H. (2008) "Return Differences between Trading and Non-trading Hours: Like Night and Day", working paper.
 - Evans, M. (2018) "Forex Trading and the WMR Fix", *Journal of Banking & Finance* 87.
 - Hurst, B., Ooi, Y. H. & Pedersen, L. H. (2017) "A Century of Evidence on Trend-Following Investing", *Journal of Portfolio Management* 44(1).
@@ -302,6 +313,4 @@ IndexReversion_EA（米国株価指数の日足逆張り）の次に検証する
 - Lou, D., Polk, C. & Skouras, S. (2019) "A Tug of War: Overnight versus Intraday Expected Returns", *Journal of Financial Economics* 134(1).
 - Lucca, D. & Moench, E. (2015) "The Pre-FOMC Announcement Drift", *Journal of Finance* 70(1).
 - Lustig, H., Roussanov, N. & Verdelhan, A. (2011) "Common Risk Factors in Currency Markets", *Review of Financial Studies* 24(11).
-- Melvin, M. & Prins, J. (2015) "Equity Hedging and Exchange Rates at the London 4 p.m. Fix", *Journal of Financial Markets* 22.
 - Menkhoff, L., Sarno, L., Schmeling, M. & Schrimpf, A. (2012) "Carry Trades and Global Foreign Exchange Volatility", *Journal of Finance* 67(2).
-- Ranaldo, A. (2009) "Segmentation and Time-of-Day Patterns in Foreign Exchange Markets", *Journal of Banking & Finance* 33(12).

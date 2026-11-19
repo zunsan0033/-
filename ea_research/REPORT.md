@@ -489,20 +489,57 @@ CANDIDATES.md に事前登録した 4 つを、利用中の業者の 5 分足（
 - **④ 夜間保有**：夜間の値上がりは、CFD の金利（1 泊約 2bp）とスプレッドでほぼ消えました。
 - **試行の数**：今回の 5 件（①、②、③の主案と副案、④）も、試行の数に加えます。合格の基準を先に決め、結果を見てから基準を動かしていないので、「たまたま良く見えた戦略」を拾ってはいません。
 
+## 13. 第 3 弾の候補の検証（2026-11-19）
+
+CANDIDATES.md に事前登録した 3 つ（⑤〜⑦）を、利用中の業者の 1 時間足で検証しました。期間は、為替が 2010 年 1 月から、金が 2013 年 5 月から、どちらも 2026 年 11 月までです（`research/cand3.py`、`results/round3_summary.csv`）。事前登録は、データを受け取る前にコミットしてあります。
+
+- **コスト**：その 1 時間足のスプレッドの半分＋滑り 0.5bp を、片道ごとに差し引いています。往復では 2.2〜2.7bp（参考の AUDUSD は 3.3bp）でした。
+- **時刻**：サーバー時刻を UTC とロンドン時間に直しています。換算が正しいことは、米雇用統計の日で確かめました。発表はニューヨークの 8:30 で、EURUSD の値幅が最も大きい 1 時間足は、米国の冬は UTC 13 時、夏は UTC 12 時でした（`research/cand3_gross.py`）。
+- **前半と後半**：各銘柄のデータの期間の真ん中で分けています。
+
+**結論：3 つとも合格しませんでした。** 今の 3 つの戦略（S&P500 と NASDAQ100 の日足逆張り、NASDAQ100 の日中モメンタム）に足せるものはありません。
+
+| 候補 | シャープ（全期間） | 前半 | 後半 | 1 回あたり（コスト前 → コスト後） |
+|---|---|---|---|---|
+| ⑤ 月末の為替ヘッジ調整・主案（EURUSD） | −0.34 | −0.62 | −0.03 | −1.0bp → −3.4bp |
+| ⑤ 同・副案（USDJPY） | −0.38 | 0.37 | −1.05 | −1.7bp → −4.0bp |
+| ⑥ 為替の時間帯効果（3 つを同じ大きさで） | −1.55 | −1.18 | −2.01 | 0.5bp → −1.7bp（1 日あたり） |
+| 　USDJPY 買い（UTC 0〜7 時） | −1.67 | −2.06 | −1.22 | −1.0bp → −3.3bp |
+| 　EURUSD 売り（UTC 7〜12 時） | −0.30 | 0.22 | −1.02 | 1.7bp → −0.5bp |
+| 　EURUSD 買い（UTC 13〜20 時） | −0.67 | −0.17 | −1.28 | 0.8bp → −1.5bp |
+| ⑦ 金のアジア時間（UTC 0〜7 時に買い） | −0.43 | −0.88 | −0.14 | 1.4bp → −1.3bp |
+
+シャープはコスト後です。コスト前の値は `results/round3_gross.csv` にあります。
+
+- **⑤ 月末の為替ヘッジ調整**：コストを除いても、効果は見られませんでした。副案（USDJPY）は前半はプラスでしたが、後半は逆向きに動いていました（コスト前の t 値 −2.2）。
+- **⑥ 為替の時間帯効果**：
+  - 欧州の午前にユーロが下がる傾向は、コスト前では残っていました（1 回 1.7bp、t 値 4.0、前半・後半ともプラス）。ただし往復のコスト（約 2.2bp）のほうが大きく、コスト後はマイナスです。後半の 8 年に限ると、コスト前でも 1 回 1.0bp でした。コストの低い口座に替えても、利益はほとんど残りません。
+  - 3 つの組み合わせは、コスト前ならシャープ 0.43 で基準を超えていましたが、コスト後は −1.55 です。
+  - 東京時間の円安（USDJPY 買い）は、前半には仮説と逆向きに動き（コスト前の t 値 −2.9）、後半はほぼゼロでした。参考の AUDUSD 売りも同じでした。
+- **⑦ 金のアジア時間**：
+  - アジア時間の 1 時間あたりの平均は、前半・後半ともほかの時間を上回りました（前半 0.13bp と −0.04bp、後半 0.28bp と 0.21bp）。2 つ目の基準は満たしています。
+  - ただし、1 回あたりの値上がり（コスト前 1.4bp）がコスト（約 2.7bp）の半分ほどしかなく、コスト後のシャープは −0.43 でした。
+- **まとめ**：1 時間足で見る時間帯の癖は、あっても 1 回 1〜2bp ほどです。個人向け口座の往復コスト（2〜3bp）に届きません。
+- **修正**：⑤ の計算で、データの最後のまだ終わっていない月（2026 年 11 月）を月末とみなし、1 回売買していました。事前登録のルール（月の最終営業日）に合わせて外しました。結果はほぼ変わりません（主案のシャープ −0.339 → −0.344）。
+- **試行の数**：今回の 4 件（⑤の主案と副案、⑥、⑦）も、試行の数に加えます。
+
 ## 参考文献
 
 - Bailey, D. & López de Prado, M. (2012) "The Sharpe Ratio Efficient Frontier", *Journal of Risk* 15(2).
 - Bailey, D. & López de Prado, M. (2014) "The Deflated Sharpe Ratio", *Journal of Portfolio Management* 40(5).
 - Baltussen, G., Da, Z., Lammers, S. & Martens, M. (2021) "Hedging demand and market intraday momentum", *Journal of Financial Economics* 142(1).
 - Breedon, F. & Ranaldo, A. (2013) "Intraday patterns in FX returns and order flow", *Journal of Money, Credit and Banking* 45(5).
+- Caminschi, A. & Heaney, R. (2014) "Fixing a Leaky Fixing: Short-Term Market Reactions to the London PM Gold Price Fixing", *Journal of Futures Markets* 34(11).
 - Cheng, M. & Madhavan, A. (2009) "The Dynamics of Leveraged and Inverse Exchange-Traded Funds", *Journal of Investment Management* 7(4).
 - Connors, L. & Alvarez, C. (2008) *Short Term Trading Strategies That Work*. TradingMarkets.
 - Faber, M. (2007) "A Quantitative Approach to Tactical Asset Allocation", *Journal of Wealth Management* 9(4).
 - Gao, L., Han, Y., Li, S. & Zhou, G. (2018) "Market intraday momentum", *Journal of Financial Economics* 129(2).
 - Lakonishok, J. & Smidt, S. (1988) "Are Seasonal Anomalies Real? A Ninety-Year Perspective", *Review of Financial Studies* 1(4).
 - McConnell, J. & Xu, W. (2008) "Equity Returns at the Turn of the Month", *Financial Analysts Journal* 64(2).
+- Melvin, M. & Prins, J. (2015) "Equity Hedging and Exchange Rates at the London 4 p.m. Fix", *Journal of Financial Markets* 22.
 - Moskowitz, T., Ooi, Y. H. & Pedersen, L. H. (2012) "Time series momentum", *Journal of Financial Economics* 104(2).
 - Nagel, S. (2012) "Evaporating Liquidity", *Review of Financial Studies* 25(7).
 - Pagonidis, A. (2014) "The IBS Effect: Mean Reversion in Equity ETFs", NAAIM.
 - Politis, D. & Romano, J. (1994) "The Stationary Bootstrap", *Journal of the American Statistical Association* 89(428).
+- Ranaldo, A. (2009) "Segmentation and Time-of-Day Patterns in Foreign Exchange Markets", *Journal of Banking & Finance* 33(12).
 - Zarattini, C., Aziz, A. & Barbon, A. (2024) "Beat the Market: An Effective Intraday Momentum Strategy for S&P500 ETF (SPY)", SSRN.

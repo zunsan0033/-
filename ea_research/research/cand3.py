@@ -52,9 +52,11 @@ def month_end(fx, d1, a, b, side_if_a_wins):
     j = ent[['o', 'sbp']].join(ext[['o', 'sbp']], lsuffix='_in', rsuffix='_out', how='inner')
     j = j[j.index.dayofweek < 5]
     last_days = j.groupby(j.index.to_period('M')).apply(lambda g: g.index.max()).values
+    # a month still in progress at the end of the data has no month end yet
+    last_days = [T for T in pd.to_datetime(last_days) if T.to_period('M') < j.index.max().to_period('M')]
     ca, cb = d1[a].c, d1[b].c
     out = {}
-    for T in pd.to_datetime(last_days):
+    for T in last_days:
         m0 = T.replace(day=1)
         pa, pb = ca[ca.index < m0], cb[cb.index < m0]
         la, lb = ca[ca.index < T], cb[cb.index < T]
@@ -123,7 +125,7 @@ def main():
         legs['EURUSD long 13-20'] = window(U['EURUSD'], 13, 20, +1)
     leg_sh = {k: add('(6) ' + k, v) for k, v in legs.items()}
     if len(legs) == 3:
-        combo = pd.concat(legs.values(), axis=1).fillna(0.0).mean(axis=1)
+        combo = pd.concat(legs.values(), axis=1, sort=True).fillna(0.0).mean(axis=1)
         s6 = add('(6) combined three legs', combo)
         verdict['(6)'] = (s6['full'] >= 0.3 and s6['first half'] > 0 and s6['second half'] > 0 and
                           sum(v['full'] > 0 for v in leg_sh.values() if v) >= 2)
