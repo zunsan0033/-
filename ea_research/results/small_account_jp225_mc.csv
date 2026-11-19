@@ -1,0 +1,17 @@
+scenario,config,horizon,median,p10,p90,P_loss,P_double,P_below_100k
+same edge,G0 current IndexGrowth,1y,"229,022","141,041","329,707",13%,17%,1%
+same edge,G0 current IndexGrowth,3y,"446,225","256,325","685,491",2%,84%,2%
+same edge,"G1 G0 + JP225 A,B 1.0x",1y,"245,322","140,604","364,547",13%,27%,2%
+same edge,"G1 G0 + JP225 A,B 1.0x",3y,"524,200","282,197","945,362",1%,88%,4%
+same edge,"G2 G0 + JP225 A,B 0.5x",1y,"235,536","141,993","343,698",12%,22%,1%
+same edge,"G2 G0 + JP225 A,B 0.5x",3y,"482,082","277,314","797,475",2%,87%,3%
+same edge,G3 JP225 instead of US100 rev,1y,"204,875","157,505","263,315",7%,4%,1%
+same edge,G3 JP225 instead of US100 rev,3y,"340,768","225,711","521,785",1%,67%,1%
+edge halved,G0 current IndexGrowth,1y,"179,025","115,431","258,937",34%,3%,4%
+edge halved,G0 current IndexGrowth,3y,"251,513","106,898","436,313",24%,36%,14%
+edge halved,"G1 G0 + JP225 A,B 1.0x",1y,"179,163","108,781","283,753",37%,7%,10%
+edge halved,"G1 G0 + JP225 A,B 1.0x",3y,"267,430","104,401","508,496",25%,42%,23%
+edge halved,"G2 G0 + JP225 A,B 0.5x",1y,"177,130","114,275","268,410",35%,5%,5%
+edge halved,"G2 G0 + JP225 A,B 0.5x",3y,"263,565","106,102","470,604",25%,40%,19%
+edge halved,G3 JP225 instead of US100 rev,1y,"174,753","125,536","228,191",25%,0%,4%
+edge halved,G3 JP225 instead of US100 rev,3y,"224,930","127,155","348,320",15%,21%,12%
