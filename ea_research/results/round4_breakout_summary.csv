@@ -1,0 +1,13 @@
+candidate,pair,side,trades,avg_R,avg_R_gross,t
+(11) carry-direction 1-hour breakout,AUDUSD,sell,179,-0.1278,-0.0920,-0.8999
+(11) carry-direction 1-hour breakout,AUDUSD,buy,211,-0.1615,-0.1487,-1.3707
+(11) carry-direction 1-hour breakout,EURUSD,sell,380,-0.0942,-0.0616,-1.0326
+(11) carry-direction 1-hour breakout,EURUSD,buy,129,-0.2031,-0.1566,-1.3728
+(11) carry-direction 1-hour breakout,GBPUSD,sell,114,0.2698,0.3078,1.3040
+(11) carry-direction 1-hour breakout,GBPUSD,buy,169,0.0107,0.0658,0.0742
+(11) carry-direction 1-hour breakout,AUDUSD,both,390,-0.1460,-0.1227,-1.6038
+(11) carry-direction 1-hour breakout,EURUSD,both,509,-0.1218,-0.0857,-1.5674
+(11) carry-direction 1-hour breakout,GBPUSD,both,283,0.1151,0.1632,0.9619
+(11) carry-direction 1-hour breakout,"pooled, full",both,1182,-0.0731,-0.0383,-1.3698
+(11) carry-direction 1-hour breakout,"pooled, first half",both,641,-0.1006,-0.0671,-1.4552
+(11) carry-direction 1-hour breakout,"pooled, second half",both,541,-0.0405,-0.0042,-0.4878

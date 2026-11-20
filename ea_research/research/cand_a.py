@@ -3,7 +3,8 @@
   python -I cand_a.py <folder with *_M5*.csv> [--d1 <folder with *_D1*.csv>] [--out ../results]
 
 Pre-registered rules (CANDIDATES.md):
-  * session: US indices 09:30-16:00 New York; GER40 09:00-17:30 Frankfurt (same idea on the local cash session)
+  * session: US indices 09:30-16:00 New York; GER40 09:00-17:30 Frankfurt (same idea on the local cash session);
+    JP225 09:00-15:00 Tokyo (round-5 candidate 12, pre-registered 2026-11-20)
   * open = first bar open; prev close = previous session's last bar close
   * sigma(k) = mean over the previous 14 complete sessions of |close(k)/open - 1| at the same bar k
   * upper = max(open, prev close) * (1 + sigma(k)); lower = min(open, prev close) * (1 - sigma(k))
@@ -26,7 +27,8 @@ import metrics as M
 SESSIONS = {'US500': ('America/New_York', 9 * 60 + 30, 16 * 60),
             'US100': ('America/New_York', 9 * 60 + 30, 16 * 60),
             'US30': ('America/New_York', 9 * 60 + 30, 16 * 60),
-            'GER40': ('Europe/Berlin', 9 * 60, 17 * 60 + 30)}
+            'GER40': ('Europe/Berlin', 9 * 60, 17 * 60 + 30),
+            'JP225': ('Asia/Tokyo', 9 * 60, 15 * 60)}      # round-5 candidate (12), added before its data
 PUBLISHED = pd.Timestamp('2024-05-31')
 SERVER_TZ = 'Europe/Athens'
 
