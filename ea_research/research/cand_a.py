@@ -69,9 +69,13 @@ def session_arrays(d, tz, s0, s1):
     return piv, n
 
 
-def run(d, sym, lookback=14, target=0.02, max_lev=4.0, slip_bp=0.5, cost_scale=1.0, stop_pct=0.0):
+def run(d, sym, lookback=14, target=0.02, max_lev=4.0, slip_bp=0.5, cost_scale=1.0, stop_pct=0.0,
+        step=30, band_mult=1.0, one_entry=False, hold_to_close=False):
     """Simulate the rules on complete sessions. stop_pct > 0 adds a protective stop at entry*(1 -/+ stop_pct),
-    checked on every M5 bar after the entry bar (fill at the stop, or at the bar open if it gapped through)."""
+    checked on every M5 bar after the entry bar (fill at the stop, or at the bar open if it gapped through).
+    Round-8 variants (defaults reproduce candidate A): step = minutes between decisions; band_mult = width of the
+    noise band in units of sigma; one_entry = no new position after the day's first one is closed;
+    hold_to_close = the first position is kept to the session close (or its stop), implying one_entry."""
     tz, s0, s1 = SESSIONS[sym]
     P, n = session_arrays(d, tz, s0, s1)
     dates = pd.to_datetime(P['c'].index)
@@ -87,7 +91,7 @@ def run(d, sym, lookback=14, target=0.02, max_lev=4.0, slip_bp=0.5, cost_scale=1
     move = np.abs(C / O[:, None] - 1.0)
     close_px = C[:, -1]
     dret = np.r_[np.nan, close_px[1:] / close_px[:-1] - 1]
-    dec_k = [(t - s0) // 5 - 1 for t in range(s0 + 30, s1 - 29, 30)]     # bar whose close is the decision time
+    dec_k = [(t - s0) // 5 - 1 for t in range(s0 + step, s1 - step + 1, step)]   # bar whose close is the decision time
     dec_set = set(dec_k)
     daily = np.zeros(len(dates)); lev_used = np.zeros(len(dates)); ntr = np.zeros(len(dates), dtype=int)
     trades = []
@@ -98,8 +102,9 @@ def run(d, sym, lookback=14, target=0.02, max_lev=4.0, slip_bp=0.5, cost_scale=1
             continue
         lev = min(max_lev, target / vol14)
         o = O[i]; pc = close_px[i - 1]
-        ub = max(o, pc) * (1 + sigma); lb = min(o, pc) * (1 - sigma)
+        ub = max(o, pc) * (1 + band_mult * sigma); lb = min(o, pc) * (1 - band_mult * sigma)
         pos, entry, pnl, ek = 0, 0.0, 0.0, -1
+        entered = False
 
         def close_trade(k, px, reason):
             nonlocal pos, pnl
@@ -130,8 +135,11 @@ def run(d, sym, lookback=14, target=0.02, max_lev=4.0, slip_bp=0.5, cost_scale=1
             if want == pos:
                 continue
             if pos != 0:
+                if hold_to_close:
+                    continue
                 close_trade(k, p, 'rule')
-            if want != 0:
+            if want != 0 and not ((one_entry or hold_to_close) and entered):
+                entered = True
                 cost = cost_scale * (spr_bp[i, k] / 2 + slip_bp) / 1e4
                 entry, ek = p, k
                 pnl -= cost; ntr[i] += 1

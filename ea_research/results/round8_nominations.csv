@@ -1,0 +1,3 @@
+group,id,inst,rule,days,start,end,sharpe,t,mean_bp,h1_bp,h2_bp,trades,per_trade_bp,excess_t,excess_bp,nominate,incumbent_sharpe,bench_sharpe
+A,A|US100|buy reopen -> 16:00 New York,US100,buy reopen -> 16:00 New York after a weak close,1270,2017-02-01,2021-12-31,1.3060,2.9319,5.8776,2.0995,9.6558,198,37.7000,,,True,1.3630,
+A,A|US500|buy reopen -> 09:30 New York,US500,buy reopen -> 09:30 New York after a weak close,1270,2017-02-01,2021-12-31,1.1229,2.5208,2.8722,1.4361,4.3083,207,17.6215,,,True,0.9425,
