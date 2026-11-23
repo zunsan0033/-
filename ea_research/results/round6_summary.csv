@@ -1,0 +1,31 @@
+candidate,period,start,end,sharpe,cagr,maxdd,t_stat,trades,win_rate,avg_trade_bp
+(13) JP225 reversion at the local close (A+B),full,2017-10-30,2026-11-20,0.1660,0.0091,-0.1378,0.5020,437,0.5515,4.8053
+(13) JP225 reversion at the local close (A+B),first half,2017-10-30,2022-05-11,0.2932,0.0163,-0.1248,0.6242,208,0.5673,7.8510
+(13) JP225 reversion at the local close (A+B),second half,2022-05-12,2026-11-20,0.0665,0.0022,-0.1264,0.1430,229,0.5371,2.0389
+"(13 ref) JP225 local close, rule A only",full,2017-10-30,2026-11-20,-0.1401,-0.0084,-0.1627,-0.4239,362,0.5138,-3.6019
+"(13 ref) JP225 local close, rule A only",first half,2017-10-30,2022-05-11,0.4222,0.0170,-0.0681,0.8989,172,0.5465,9.3682
+"(13 ref) JP225 local close, rule A only",second half,2022-05-12,2026-11-20,-0.5429,-0.0327,-0.1627,-1.1669,190,0.4842,-15.3433
+"(13 ref) JP225 local close, rule B only",full,2017-10-30,2026-11-20,0.4921,0.0180,-0.0823,1.4887,75,0.7333,45.3841
+"(13 ref) JP225 local close, rule B only",first half,2017-10-30,2022-05-11,0.0069,-0.0004,-0.0823,0.0146,36,0.6667,0.6021
+"(13 ref) JP225 local close, rule B only",second half,2022-05-12,2026-11-20,0.9042,0.0364,-0.0341,1.9433,39,0.7949,86.7214
+"(13 ref) JP225 local close, IBS from the 24-hour range (A+B)",full,2017-10-30,2026-11-20,0.2048,0.0124,-0.1541,0.6194,427,0.5667,6.4297
+"(13 ref) JP225 local close, IBS from the 24-hour range (A+B)",first half,2017-10-30,2022-05-11,0.0413,0.0005,-0.1541,0.0880,210,0.5857,1.2440
+"(13 ref) JP225 local close, IBS from the 24-hour range (A+B)",second half,2022-05-12,2026-11-20,0.3513,0.0243,-0.0969,0.7549,217,0.5484,11.4480
+(13 ref) JP225 server-day bars (A+B),full,2017-10-30,2026-11-17,0.7822,0.0538,-0.0976,2.3829,428,0.5958,23.7741
+(13 ref) JP225 server-day bars (A+B),first half,2017-10-30,2022-05-09,0.4693,0.0281,-0.0865,1.0104,208,0.6202,13.3151
+(13 ref) JP225 server-day bars (A+B),second half,2022-05-11,2026-11-17,1.0460,0.0799,-0.0793,2.2539,220,0.5727,33.6626
+(14) GER40 reversion at the local close (A+B),full,2017-10-30,2026-11-17,-0.4626,-0.0285,-0.2554,-1.3952,398,0.5628,-11.9088
+(14) GER40 reversion at the local close (A+B),first half,2017-10-30,2022-05-09,-0.8495,-0.0542,-0.2226,-1.8060,182,0.5495,-25.9825
+(14) GER40 reversion at the local close (A+B),second half,2022-05-11,2026-11-17,-0.0448,-0.0039,-0.1098,-0.0958,216,0.5741,-0.0505
+"(14 ref) GER40 local close, rule A only",full,2017-10-30,2026-11-17,-0.5465,-0.0256,-0.2169,-1.6482,331,0.5438,-13.0513
+"(14 ref) GER40 local close, rule A only",first half,2017-10-30,2022-05-09,-0.9674,-0.0503,-0.2110,-2.0566,155,0.5290,-28.4917
+"(14 ref) GER40 local close, rule A only",second half,2022-05-11,2026-11-17,-0.0328,-0.0020,-0.0488,-0.0702,176,0.5568,0.5468
+"(14 ref) GER40 local close, rule B only",full,2017-10-30,2026-11-17,-0.0730,-0.0028,-0.0975,-0.2202,67,0.6567,-6.2647
+"(14 ref) GER40 local close, rule B only",first half,2017-10-30,2022-05-09,-0.1159,-0.0039,-0.0519,-0.2465,27,0.6667,-11.5778
+"(14 ref) GER40 local close, rule B only",second half,2022-05-11,2026-11-17,-0.0352,-0.0017,-0.0975,-0.0752,40,0.6500,-2.6784
+"(14 ref) GER40 local close, IBS from the 24-hour range (A+B)",full,2017-10-30,2026-11-17,-0.2413,-0.0163,-0.1821,-0.7276,395,0.5949,-6.1716
+"(14 ref) GER40 local close, IBS from the 24-hour range (A+B)",first half,2017-10-30,2022-05-09,-0.4540,-0.0300,-0.1554,-0.9653,184,0.5924,-13.3273
+"(14 ref) GER40 local close, IBS from the 24-hour range (A+B)",second half,2022-05-11,2026-11-17,-0.0371,-0.0038,-0.1124,-0.0794,211,0.5972,0.0685
+(14 ref) GER40 server-day bars (A+B),full,2017-10-30,2026-11-17,0.1074,0.0048,-0.1916,0.3243,426,0.6009,3.3353
+(14 ref) GER40 server-day bars (A+B),first half,2017-10-30,2022-05-09,-0.1263,-0.0115,-0.1499,-0.2690,214,0.6075,-3.1960
+(14 ref) GER40 server-day bars (A+B),second half,2022-05-11,2026-11-17,0.3742,0.0198,-0.0892,0.8007,212,0.5943,9.9283
