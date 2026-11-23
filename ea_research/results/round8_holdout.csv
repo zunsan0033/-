@@ -1,0 +1,3 @@
+group,id,inst,rule,days,start,end,sharpe,t,mean_bp,h1_bp,h2_bp,trades,per_trade_bp,incumbent_sharpe,verdict
+A,A|US100|buy reopen -> 16:00 New York,US100,buy reopen -> 16:00 New York after a weak close,1262,2022-01-03,2026-11-18,0.8999,2.0138,4.3637,1.8144,6.9130,244,22.5695,1.0358,PASS
+A,A|US500|buy reopen -> 09:30 New York,US500,buy reopen -> 09:30 New York after a weak close,1262,2022-01-03,2026-11-18,0.4191,0.9379,0.8425,-0.0459,1.7308,233,4.5631,0.6071,fail

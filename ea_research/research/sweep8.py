@@ -5,7 +5,9 @@
 
 Stage "discovery" evaluates every rule on the discovery period only and writes round8_discovery.csv and
 round8_nominations.csv (rules kept by the pre-registered criteria). Stage "holdout" evaluates only the rules
-listed in round8_nominations.csv on the holdout period and writes round8_holdout.csv.
+listed in round8_nominations.csv on the holdout period and writes round8_holdout.csv. Stage "gross" is a diagnostic on the
+discovery period only: the same rules before spread and slippage (financing kept), written to
+round8_discovery_gross.csv.
 
 Groups:  A  windows of the day after a weak close (US500, US100)     A' the same windows every day
          B  momentum / reversal after an announcement-time shock    C  lower-turnover intraday momentum
@@ -172,7 +174,7 @@ def group_d(d1, recs):
             f = pd.Series(np.asarray(f, dtype=bool), index=idx)
             pos = f.shift(-1, fill_value=False).astype(float)          # held while the flagged bar forms
             recs.append(dict(group='D', id=f'D|{sym}|{name}', inst=sym, rule=name, tf='D1', nominate=sym in ('US500', 'US100', 'JP225'),
-                             r=daily_net(d.ret, pos, cost, fl, fs), entry=entries_of(pos), flag=f, ret=d.ret))
+                             r=daily_net(d.ret, pos, cost, fl, fs), g=daily_net(d.ret, pos, 0.0, fl, fs), entry=entries_of(pos), flag=f, ret=d.ret))
 
 
 def group_e(d1, recs):
@@ -185,7 +187,7 @@ def group_e(d1, recs):
         for name, pos in [('buy after IBS < 0.2, one day', (d.ibs < 0.2).astype(float)),
                           ('sell after IBS > 0.8, one day', -(d.ibs > 0.8).astype(float))]:
             recs.append(dict(group='E', id=f'E|{sym}|{name}', inst=sym, rule=name, tf='D1', nominate=True,
-                             r=daily_net(d.ret, pos, cost, fl, fs), entry=entries_of(pos)))
+                             r=daily_net(d.ret, pos, cost, fl, fs), g=daily_net(d.ret, pos, 0.0, fl, fs), entry=entries_of(pos)))
 
 
 def group_f(d1, recs):
@@ -206,7 +208,7 @@ def group_f(d1, recs):
                 pos = bb_positions(x, L, z)
                 rule = f'fade {z} sd from the {L}-day mean'
                 recs.append(dict(group='F', id=f'F|{name}|{rule}', inst=name, rule=rule, tf='D1', nominate=True,
-                                 r=daily_net(ret, pos, cost, fl, fs), entry=entries_of(pos)))
+                                 r=daily_net(ret, pos, cost, fl, fs), g=daily_net(ret, pos, 0.0, fl, fs), entry=entries_of(pos)))
 
 
 def group_g(d1, recs):
@@ -225,7 +227,7 @@ def group_g(d1, recs):
             pos = bb_positions(x, L, 2.0)
             rule = f'fade 2 sd of the log ratio from its {L}-day mean'
             recs.append(dict(group='G', id=f'G|{a}/{b}|{rule}', inst=f'{a}/{b}', rule=rule, tf='D1', nominate=True,
-                             r=daily_net(ret, pos, cost, fl, fs), entry=entries_of(pos)))
+                             r=daily_net(ret, pos, cost, fl, fs), g=daily_net(ret, pos, 0.0, fl, fs), entry=entries_of(pos)))
 
 
 # ------------------------------------------------------------------ M5 groups
@@ -293,9 +295,11 @@ def group_a(bars, d1p, sym, recs):
             ok, gross, cost = bars.leg(idx[i], idx[j])
             rule = f'buy {names[i]} -> {names[j]} New York'
             recs.append(dict(group='A', id=f'A|{sym}|{rule}', inst=sym, rule=rule + ' after a weak close', tf='M5', nominate=True,
-                             r=bars.series(gross - cost, ok & sig), entry=pd.Series(ok & sig, index=bars.days), incumbent=incumbent))
+                             r=bars.series(gross - cost, ok & sig), g=bars.series(gross, ok & sig),
+                             entry=pd.Series(ok & sig, index=bars.days), incumbent=incumbent))
             recs.append(dict(group="A'", id=f"A'|{sym}|{rule}", inst=sym, rule=rule + ' every day', tf='M5', nominate=True,
-                             r=bars.series(gross - cost, ok), entry=pd.Series(ok, index=bars.days), bench=hold))
+                             r=bars.series(gross - cost, ok), g=bars.series(gross, ok), entry=pd.Series(ok, index=bars.days),
+                             bench=hold))
 
 
 def group_b(bars, sym, recs):
@@ -314,10 +318,10 @@ def group_b(bars, sym, recs):
                 ok, gross, cost = bars.leg(ie, bars.at(NY, xh, xm))
                 ok &= shock
                 g = np.sign(r0) * gross
-                for name, v in [('with the move', g - cost), ('against the move', -g - cost)]:
+                for name, sgn in [('with the move', 1.0), ('against the move', -1.0)]:
                     rule = f'{hh:02d}:{mm:02d} bar >= {k}x usual, trade {name} to {xh:02d}:{xm:02d}'
                     recs.append(dict(group='B', id=f'B|{sym}|{rule}', inst=sym, rule=rule, tf='M5', nominate=True,
-                                     r=bars.series(v, ok), entry=pd.Series(ok, index=bars.days)))
+                                     r=bars.series(sgn * g - cost, ok), g=bars.series(sgn * g, ok), entry=pd.Series(ok, index=bars.days)))
 
 
 def group_h(bars, sym, recs):
@@ -344,13 +348,13 @@ def group_h(bars, sym, recs):
         ok &= np.isfinite(sig) & (np.nan_to_num(sig) != 0)
         g = np.sign(np.nan_to_num(sig)) * gross
         for scope, m in [('every day', ok), ('large moves only', ok & big)]:
-            for side, v in [('follow', g - cost), ('fade', -g - cost)]:
+            for side, sgn in [('follow', 1.0), ('fade', -1.0)]:
                 rule = f'{name}: {side}, {scope}'
                 recs.append(dict(group='H', id=f'H|{sym}|{rule}', inst=sym, rule=rule, tf='M5', nominate=True,
-                                 r=bars.series(v, m), entry=pd.Series(m, index=bars.days)))
+                                 r=bars.series(sgn * g - cost, m), g=bars.series(sgn * g, m), entry=pd.Series(m, index=bars.days)))
 
 
-def group_c(m5, recs):
+def group_c(m5, recs, with_gross=False):
     variants = {'V0 current rule': {}, 'V1 one entry a day': dict(one_entry=True),
                 'V2 first signal, hold to the close, 2% stop': dict(hold_to_close=True, stop_pct=0.02),
                 'V3 decisions every 60 minutes': dict(step=60), 'V4 band 1.5x wide': dict(band_mult=1.5)}
@@ -362,6 +366,8 @@ def group_c(m5, recs):
             res, tr, _ = im_run(m5[sym], sym, **kw)
             ent = (res.trades > 0)
             rec = dict(group='C', id=f'C|{sym}|{name}', inst=sym, rule=name, tf='M5', nominate=name[:2] != 'V0', r=res.ret, entry=ent)
+            if with_gross:
+                rec['g'] = im_run(m5[sym], sym, cost_scale=0.0, **kw)[0].ret
             if base is None:
                 base = res.ret
             else:
@@ -385,8 +391,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--d1', required=True)
     ap.add_argument('--m5', nargs='+', required=True)
-    ap.add_argument('--stage', choices=['discovery', 'holdout'], required=True)
+    ap.add_argument('--stage', choices=['discovery', 'holdout', 'gross'], required=True)
     ap.add_argument('--out', default=os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'results'))
+    ap.add_argument('--rules', default='round8_nominations.csv', help='holdout stage: file in --out with the rule ids to test')
+    ap.add_argument('--result', default='round8_holdout.csv', help='holdout stage: output file name in --out')
     a = ap.parse_args()
     raw, _ = BD.load_dir(a.d1, 'D1'); d1 = BD.to_generic(raw)
     m5 = {}
@@ -403,7 +411,7 @@ def main():
             group_a(bars, B.prep(d1[sym]), sym, recs)
             group_b(bars, sym, recs)
         group_h(bars, sym, recs)
-    group_c(m5, recs)
+    group_c(m5, recs, with_gross=a.stage == 'gross')
     by_id = {r['id']: r for r in recs}
     assert len(by_id) == len(recs), 'duplicate rule ids'
     os.makedirs(a.out, exist_ok=True)
@@ -424,8 +432,31 @@ def main():
         print('with net t >= 2.0:', int((tab.t >= 2.0).sum()), '| nominated:', len(nom))
         cols = ['id', 'days', 'trades', 'sharpe', 't', 'mean_bp', 'per_trade_bp', 'h1_bp', 'h2_bp', 'excess_t', 'bench_sharpe', 'incumbent_sharpe']
         print(nom[cols].round(2).to_string(index=False))
+    elif a.stage == 'gross':
+        # diagnostic only, discovery period only: where does an effect exist before spread and slippage?
+        rows = []
+        for r in recs:
+            if r.get('g') is None:
+                continue
+            lo, hi = PERIODS['discovery'][r['tf']]
+            net, gro = r['r'].loc[lo:hi], r['g'].loc[lo:hi]
+            n = max(int(r['entry'].loc[lo:hi].sum()), 1)
+            half = (net + gro) / 2                              # spread and slippage at half the modelled size
+            mid = half.index[0] + (half.index[-1] - half.index[0]) / 2
+            rows.append(dict(group=r['group'], id=r['id'], trades=n, gross_sharpe=stat(gro)[0], gross_t=stat(gro)[1],
+                             net_sharpe=stat(net)[0], net_t=stat(net)[1], gross_per_trade_bp=float(gro.sum() / n * 1e4),
+                             cost_per_trade_bp=float((gro.sum() - net.sum()) / n * 1e4),
+                             half_cost_sharpe=stat(half)[0], half_cost_t=stat(half)[1],
+                             half_cost_both_halves=bool(half.loc[:mid].mean() > 0 and half.loc[mid + pd.Timedelta(days=1):].mean() > 0)))
+        tab = pd.DataFrame(rows)
+        tab.to_csv(os.path.join(a.out, 'round8_discovery_gross.csv'), index=False, float_format='%.4f')
+        print('rules with gross t >= 3.0 on the discovery period:', int((tab.gross_t >= 3.0).sum()), 'of', len(tab))
+        print(tab[tab.gross_t >= 3.0].sort_values('gross_t', ascending=False).round(2).to_string(index=False))
+        hc = tab[(tab.half_cost_t >= 2.0) & tab.half_cost_both_halves].sort_values('half_cost_t', ascending=False)
+        print('rules that would reach t >= 2.0 with both halves positive at half the costs (discovery period):', len(hc))
+        print(hc[['id', 'trades', 'net_t', 'half_cost_sharpe', 'half_cost_t', 'gross_t', 'gross_per_trade_bp', 'cost_per_trade_bp']].round(2).to_string(index=False))
     else:
-        nom = pd.read_csv(os.path.join(a.out, 'round8_nominations.csv'))
+        nom = pd.read_csv(os.path.join(a.out, a.rules))
         rows = []
         for rid in nom.id:
             r = by_id[rid]
@@ -434,10 +465,12 @@ def main():
             ok = e['sharpe'] >= 0.5 and e['h1_bp'] > 0 and e['h2_bp'] > 0
             if r['group'] == 'D':
                 ok = ok and e['excess_bp'] > 0
+            if r['group'] == "A'":                               # long every day: must also beat holding the index
+                ok = ok and e['sharpe'] > e['bench_sharpe']
             e['verdict'] = 'PASS' if ok else 'fail'
             rows.append(e)
         tab = pd.DataFrame(rows)
-        tab.to_csv(os.path.join(a.out, 'round8_holdout.csv'), index=False, float_format='%.4f')
+        tab.to_csv(os.path.join(a.out, a.result), index=False, float_format='%.4f')
         cols = [c for c in ['id', 'days', 'trades', 'sharpe', 't', 'per_trade_bp', 'h1_bp', 'h2_bp', 'excess_bp', 'bench_sharpe', 'incumbent_sharpe', 'verdict'] if c in tab]
         print(tab[cols].round(2).to_string(index=False))
 
