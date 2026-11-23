@@ -1,0 +1,25 @@
+rule,market,start,end,trades,mean_bp,t,win_rate,rule_day_bp,other_day_bp,period
+"last 4 days, month down so far",S&P 500 cash,1999-02,2013-12,75,104.8013,3.0390,0.6400,28.5165,-0.4892,unseen
+"last 4 days, month down so far",US500 (broker),2014-07,2020-12,26,65.7858,1.1777,0.6923,18.1668,3.5537,seen in round 8
+"last 4 days, month down so far",US500 (broker),2021-01,2026-11,24,-12.2120,-0.2670,0.4583,-0.2970,5.3467,unseen
+"last 4 days, month down so far",S&P 500 (both unseen periods),1999-02,2026-11,99,76.4344,2.6611,0.5960,,,"unseen, pooled"
+"last 4 days, month up so far",S&P 500 cash,1999-02,2013-12,104,-33.0842,-1.9582,0.3846,-5.9740,2.8013,unseen
+"last 4 days, month up so far",US500 (broker),2014-07,2020-12,52,3.3164,0.2293,0.4615,2.5987,4.7226,seen in round 8
+"last 4 days, month up so far",US500 (broker),2021-01,2026-11,47,-9.0378,-0.3739,0.5957,0.2527,5.6589,unseen
+"last 4 days, month up so far",S&P 500 (both unseen periods),1999-02,2026-11,151,-25.5996,-1.8494,0.4503,,,"unseen, pooled"
+"last 4 days, every month",S&P 500 cash,1999-02,2013-12,179,24.6891,1.3609,0.4916,8.4773,0.2619,unseen
+"last 4 days, every month",US500 (broker),2014-07,2020-12,78,24.1396,1.1491,0.5385,7.7881,3.6991,seen in round 8
+"last 4 days, every month",US500 (broker),2021-01,2026-11,71,-10.1108,-0.4584,0.5493,0.0669,6.1215,unseen
+"last 4 days, every month",S&P 500 (both unseen periods),1999-02,2026-11,250,14.8059,1.0259,0.5080,,,"unseen, pooled"
+"last 4 days, month down so far",NASDAQ Composite cash,1999-02,2013-12,73,78.8075,1.7895,0.5890,22.0289,1.2688,unseen
+"last 4 days, month down so far",US100 (broker),2014-07,2020-12,24,114.2507,2.1286,0.7083,30.3244,6.6504,seen in round 8
+"last 4 days, month down so far",US100 (broker),2021-01,2026-11,26,-6.4309,-0.0986,0.5000,0.9174,6.2749,unseen
+"last 4 days, month down so far",NASDAQ (both unseen periods),1999-02,2026-11,99,56.4216,1.5356,0.5657,,,"unseen, pooled"
+"last 4 days, month up so far",NASDAQ Composite cash,1999-02,2013-12,106,-15.7139,-0.6165,0.5566,-1.6385,3.4594,unseen
+"last 4 days, month up so far",US100 (broker),2014-07,2020-12,54,4.8302,0.2074,0.5741,2.9570,8.7506,seen in round 8
+"last 4 days, month up so far",US100 (broker),2021-01,2026-11,45,-1.0580,-0.0350,0.5333,2.3701,6.3836,unseen
+"last 4 days, month up so far",NASDAQ (both unseen periods),1999-02,2026-11,151,-11.3463,-0.5676,0.5497,,,"unseen, pooled"
+"last 4 days, every month",NASDAQ Composite cash,1999-02,2013-12,179,22.8339,0.9658,0.5698,8.0136,1.6746,unseen
+"last 4 days, every month",US100 (broker),2014-07,2020-12,78,38.4980,1.6321,0.6154,11.3777,7.2344,seen in round 8
+"last 4 days, every month",US100 (broker),2021-01,2026-11,71,-3.0256,-0.0997,0.5211,1.8382,6.8435,unseen
+"last 4 days, every month",NASDAQ (both unseen periods),1999-02,2026-11,250,15.4898,0.8162,0.5560,,,"unseen, pooled"

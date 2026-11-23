@@ -1,0 +1,178 @@
+group,id,inst,rule,days,start,end,sharpe,t,mean_bp,h1_bp,h2_bp,trades,per_trade_bp,excess_t,excess_bp
+L,"L|US500|weekend gap: fade, every week",US500,"weekend gap: fade, every week",1270,2017-02-01,2021-12-31,-0.5325,-1.1954,-2.0318,-2.3377,-1.7259,231,-11.1703,,
+L,"L|US500|weekend gap: follow, every week",US500,"weekend gap: follow, every week",1270,2017-02-01,2021-12-31,0.2027,0.4550,0.7713,0.9473,0.5953,231,4.2403,,
+L,"L|US500|weekend gap: fade, large gaps only",US500,"weekend gap: fade, large gaps only",1270,2017-02-01,2021-12-31,-0.1279,-0.2871,-0.4074,-0.4877,-0.3271,91,-5.6856,,
+L,"L|US500|weekend gap: follow, large gaps only",US500,"weekend gap: follow, large gaps only",1270,2017-02-01,2021-12-31,-0.0324,-0.0728,-0.1033,-0.0775,-0.1292,91,-1.4422,,
+M,"M|US500|opening-range breakout, first 30 minutes",US500,"opening-range breakout, first 30 minutes",1220,2017-02-01,2021-12-30,-1.3039,-2.8689,-5.0068,-2.6406,-7.3201,1211,-5.0440,,
+M,"M|US500|opening-range breakout, first 60 minutes",US500,"opening-range breakout, first 60 minutes",1220,2017-02-01,2021-12-30,-0.8504,-1.8712,-3.1514,-1.6815,-4.5543,1169,-3.2889,,
+L,"L|US100|weekend gap: fade, every week",US100,"weekend gap: fade, every week",1270,2017-02-01,2021-12-31,-0.3926,-0.8813,-1.7834,-4.4286,0.8617,230,-9.8476,,
+L,"L|US100|weekend gap: follow, every week",US100,"weekend gap: follow, every week",1270,2017-02-01,2021-12-31,0.0758,0.1701,0.3433,2.8343,-2.1476,230,1.8958,,
+L,"L|US100|weekend gap: fade, large gaps only",US100,"weekend gap: fade, large gaps only",1270,2017-02-01,2021-12-31,0.0221,0.0497,0.0797,-1.9892,2.1486,90,1.1251,,
+L,"L|US100|weekend gap: follow, large gaps only",US100,"weekend gap: follow, large gaps only",1270,2017-02-01,2021-12-31,-0.1840,-0.4132,-0.6628,1.3206,-2.6461,90,-9.3523,,
+M,"M|US100|opening-range breakout, first 30 minutes",US100,"opening-range breakout, first 30 minutes",1222,2017-02-01,2021-12-30,-0.9784,-2.1546,-4.6052,-3.1630,-5.9683,1198,-4.6975,,
+M,"M|US100|opening-range breakout, first 60 minutes",US100,"opening-range breakout, first 60 minutes",1222,2017-02-01,2021-12-30,-0.5045,-1.1109,-2.2658,-0.7462,-3.6798,1129,-2.4524,,
+L,"L|US30|weekend gap: fade, every week",US30,"weekend gap: fade, every week",1270,2017-02-01,2021-12-31,-0.0642,-0.1441,-0.2601,-0.3405,-0.1797,231,-1.4298,,
+L,"L|US30|weekend gap: follow, every week",US30,"weekend gap: follow, every week",1270,2017-02-01,2021-12-31,-0.1589,-0.3568,-0.6448,-0.6029,-0.6867,231,-3.5448,,
+L,"L|US30|weekend gap: fade, large gaps only",US30,"weekend gap: fade, large gaps only",1270,2017-02-01,2021-12-31,-0.1950,-0.4377,-0.6524,-0.4123,-0.8925,93,-8.9090,,
+L,"L|US30|weekend gap: follow, large gaps only",US30,"weekend gap: follow, large gaps only",1270,2017-02-01,2021-12-31,0.0822,0.1846,0.2752,-0.0065,0.5568,93,3.7575,,
+M,"M|US30|opening-range breakout, first 30 minutes",US30,"opening-range breakout, first 30 minutes",1222,2017-02-01,2021-12-30,-0.6670,-1.4687,-2.5787,-1.3797,-3.7152,1202,-2.6216,,
+M,"M|US30|opening-range breakout, first 60 minutes",US30,"opening-range breakout, first 60 minutes",1222,2017-02-01,2021-12-30,-0.4277,-0.9418,-1.5793,-0.3912,-2.7034,1136,-1.6989,,
+L,"L|GER40|weekend gap: fade, every week",GER40,"weekend gap: fade, every week",1242,2017-02-01,2021-12-30,-0.5703,-1.2661,-2.0210,-0.5678,-3.4657,241,-10.4151,,
+L,"L|GER40|weekend gap: follow, every week",GER40,"weekend gap: follow, every week",1242,2017-02-01,2021-12-30,0.3207,0.7119,1.1344,-0.2751,2.5344,241,5.8462,,
+L,"L|GER40|weekend gap: fade, large gaps only",GER40,"weekend gap: fade, large gaps only",1242,2017-02-01,2021-12-30,-0.0056,-0.0124,-0.0141,0.3198,-0.3453,78,-0.2246,,
+L,"L|GER40|weekend gap: follow, large gaps only",GER40,"weekend gap: follow, large gaps only",1242,2017-02-01,2021-12-30,-0.1095,-0.2431,-0.2772,-0.6224,0.0648,78,-4.4133,,
+M,"M|GER40|opening-range breakout, first 30 minutes",GER40,"opening-range breakout, first 30 minutes",1238,2017-02-01,2021-12-30,-0.2257,-0.5003,-0.9332,1.2757,-3.1273,1221,-0.9462,,
+M,"M|GER40|opening-range breakout, first 60 minutes",GER40,"opening-range breakout, first 60 minutes",1238,2017-02-01,2021-12-30,-0.1977,-0.4381,-0.8105,0.6695,-2.2165,1194,-0.8403,,
+L,"L|JP225|weekend gap: fade, every week",JP225,"weekend gap: fade, every week",1271,2017-02-01,2021-12-31,0.1222,0.2744,0.3291,-1.2605,1.9213,249,1.6800,,
+L,"L|JP225|weekend gap: follow, every week",JP225,"weekend gap: follow, every week",1271,2017-02-01,2021-12-31,-1.0097,-2.2675,-2.7507,-1.3434,-4.1602,249,-14.0406,,
+L,"L|JP225|weekend gap: fade, large gaps only",JP225,"weekend gap: fade, large gaps only",1271,2017-02-01,2021-12-31,0.6089,1.3674,0.9774,0.6796,1.2757,80,15.5286,,
+L,"L|JP225|weekend gap: follow, large gaps only",JP225,"weekend gap: follow, large gaps only",1271,2017-02-01,2021-12-31,-1.0653,-2.3925,-1.7631,-1.5549,-1.9716,80,-28.0115,,
+M,"M|JP225|opening-range breakout, first 30 minutes",JP225,"opening-range breakout, first 30 minutes",1153,2017-02-01,2021-12-31,-1.1630,-2.4877,-3.8415,-6.7661,-1.4051,1104,-4.0120,,
+M,"M|JP225|opening-range breakout, first 60 minutes",JP225,"opening-range breakout, first 60 minutes",1153,2017-02-01,2021-12-31,-1.2136,-2.5960,-3.6873,-7.0312,-0.9015,1037,-4.0997,,
+L,"L|EURUSD|weekend gap: fade, every week",EURUSD,"weekend gap: fade, every week",2208,2010-07-01,2018-12-31,0.3562,1.0544,0.4820,0.3562,0.6089,436,2.4411,,
+L,"L|EURUSD|weekend gap: follow, every week",EURUSD,"weekend gap: follow, every week",2208,2010-07-01,2018-12-31,-0.9456,-2.7991,-1.2885,-1.0266,-1.5527,436,-6.5252,,
+L,"L|EURUSD|weekend gap: fade, large gaps only",EURUSD,"weekend gap: fade, large gaps only",2208,2010-07-01,2018-12-31,0.4406,1.3043,0.4084,0.5249,0.2918,154,5.8557,,
+L,"L|EURUSD|weekend gap: follow, large gaps only",EURUSD,"weekend gap: follow, large gaps only",2208,2010-07-01,2018-12-31,-0.7434,-2.2005,-0.6960,-0.7556,-0.6368,154,-9.9792,,
+N,"N|EURUSD|Asian-range (00-07 UTC) breakout in London hours, out at 20:00 UTC",EURUSD,"Asian-range (00-07 UTC) breakout in London hours, out at 20:00 UTC",2209,2010-07-01,2018-12-31,-0.5502,-1.6290,-1.1741,-0.6907,-1.6330,1716,-1.5114,,
+O,O|EURUSD|hourly mean reversion: fade 2 sd from the 20-bar mean,EURUSD,hourly mean reversion: fade 2 sd from the 20-bar mean,2208,2010-07-01,2018-12-31,-0.7154,-2.1176,-1.9077,-1.6094,-2.2154,2069,-2.0358,,
+O,O|EURUSD|hourly mean reversion: fade 2 sd from the 50-bar mean,EURUSD,hourly mean reversion: fade 2 sd from the 50-bar mean,2208,2010-07-01,2018-12-31,-0.0354,-0.1048,-0.0955,-0.0459,-0.1454,942,-0.2239,,
+L,"L|USDJPY|weekend gap: fade, every week",USDJPY,"weekend gap: fade, every week",2208,2010-07-01,2018-12-31,0.5517,1.6331,0.8116,1.8141,-0.1948,434,4.1288,,
+L,"L|USDJPY|weekend gap: follow, every week",USDJPY,"weekend gap: follow, every week",2208,2010-07-01,2018-12-31,-1.1833,-3.5026,-1.7604,-2.7616,-0.7562,434,-8.9561,,
+L,"L|USDJPY|weekend gap: fade, large gaps only",USDJPY,"weekend gap: fade, large gaps only",2208,2010-07-01,2018-12-31,0.3912,1.1580,0.3951,0.9184,-0.1302,151,5.7776,,
+L,"L|USDJPY|weekend gap: follow, large gaps only",USDJPY,"weekend gap: follow, large gaps only",2208,2010-07-01,2018-12-31,-0.7108,-2.1039,-0.7254,-1.2336,-0.2155,151,-10.6072,,
+N,"N|USDJPY|Asian-range (00-07 UTC) breakout in London hours, out at 20:00 UTC",USDJPY,"Asian-range (00-07 UTC) breakout in London hours, out at 20:00 UTC",2209,2010-07-01,2018-12-31,-0.4199,-1.2433,-0.7302,-1.0450,-0.4144,1286,-1.2543,,
+O,O|USDJPY|hourly mean reversion: fade 2 sd from the 20-bar mean,USDJPY,hourly mean reversion: fade 2 sd from the 20-bar mean,2208,2010-07-01,2018-12-31,-1.2524,-3.7073,-3.3591,-3.0409,-3.6450,1862,-3.9832,,
+O,O|USDJPY|hourly mean reversion: fade 2 sd from the 50-bar mean,USDJPY,hourly mean reversion: fade 2 sd from the 50-bar mean,2208,2010-07-01,2018-12-31,-0.8602,-2.5461,-2.3695,-1.9305,-2.7930,902,-5.8004,,
+L,"L|GBPUSD|weekend gap: fade, every week",GBPUSD,"weekend gap: fade, every week",2208,2010-07-01,2018-12-31,0.0290,0.0860,0.0332,-0.2478,0.3154,436,0.1680,,
+L,"L|GBPUSD|weekend gap: follow, every week",GBPUSD,"weekend gap: follow, every week",2208,2010-07-01,2018-12-31,-0.7900,-2.3384,-0.9075,-0.4893,-1.3283,436,-4.5957,,
+L,"L|GBPUSD|weekend gap: fade, large gaps only",GBPUSD,"weekend gap: fade, large gaps only",2208,2010-07-01,2018-12-31,-0.4707,-1.3932,-0.3408,0.0767,-0.7606,153,-4.9189,,
+L,"L|GBPUSD|weekend gap: follow, large gaps only",GBPUSD,"weekend gap: follow, large gaps only",2208,2010-07-01,2018-12-31,0.0405,0.1199,0.0291,-0.3235,0.3834,153,0.4204,,
+N,"N|GBPUSD|Asian-range (00-07 UTC) breakout in London hours, out at 20:00 UTC",GBPUSD,"Asian-range (00-07 UTC) breakout in London hours, out at 20:00 UTC",2209,2010-07-01,2018-12-31,-0.4503,-1.3332,-0.9019,-0.7628,-1.0426,1798,-1.1081,,
+O,O|GBPUSD|hourly mean reversion: fade 2 sd from the 20-bar mean,GBPUSD,hourly mean reversion: fade 2 sd from the 20-bar mean,2208,2010-07-01,2018-12-31,-0.9873,-2.9225,-2.4543,-1.5712,-3.3467,2095,-2.5866,,
+O,O|GBPUSD|hourly mean reversion: fade 2 sd from the 50-bar mean,GBPUSD,hourly mean reversion: fade 2 sd from the 50-bar mean,2208,2010-07-01,2018-12-31,-0.1034,-0.3061,-0.2691,0.7496,-1.2986,974,-0.6100,,
+L,"L|AUDUSD|weekend gap: fade, every week",AUDUSD,"weekend gap: fade, every week",2208,2010-07-01,2018-12-31,-0.4742,-1.4035,-0.7236,-1.2642,-0.1813,438,-3.6479,,
+L,"L|AUDUSD|weekend gap: follow, every week",AUDUSD,"weekend gap: follow, every week",2208,2010-07-01,2018-12-31,-0.3483,-1.0309,-0.5306,0.0861,-1.1506,438,-2.6748,,
+L,"L|AUDUSD|weekend gap: fade, large gaps only",AUDUSD,"weekend gap: fade, large gaps only",2208,2010-07-01,2018-12-31,-0.1955,-0.5788,-0.2045,-0.6402,0.2330,165,-2.7366,,
+L,"L|AUDUSD|weekend gap: follow, large gaps only",AUDUSD,"weekend gap: follow, large gaps only",2208,2010-07-01,2018-12-31,-0.2669,-0.7899,-0.2792,0.2282,-0.7891,165,-3.7357,,
+N,"N|AUDUSD|Asian-range (00-07 UTC) breakout in London hours, out at 20:00 UTC",AUDUSD,"Asian-range (00-07 UTC) breakout in London hours, out at 20:00 UTC",2209,2010-07-01,2018-12-31,-0.9801,-2.9017,-1.9953,-1.8557,-2.1375,1311,-3.3620,,
+O,O|AUDUSD|hourly mean reversion: fade 2 sd from the 20-bar mean,AUDUSD,hourly mean reversion: fade 2 sd from the 20-bar mean,2208,2010-07-01,2018-12-31,-0.3667,-1.0855,-1.0796,-3.3979,1.2220,1954,-1.2199,,
+O,O|AUDUSD|hourly mean reversion: fade 2 sd from the 50-bar mean,AUDUSD,hourly mean reversion: fade 2 sd from the 50-bar mean,2208,2010-07-01,2018-12-31,-0.0462,-0.1369,-0.1438,-1.6058,1.2836,965,-0.3290,,
+L,"L|XAUUSD|weekend gap: fade, every week",XAUUSD,"weekend gap: fade, every week",1456,2013-05-10,2018-12-31,-0.1690,-0.4063,-0.3870,0.2616,-1.0355,265,-2.1262,,
+L,"L|XAUUSD|weekend gap: follow, every week",XAUUSD,"weekend gap: follow, every week",1456,2013-05-10,2018-12-31,-0.3076,-0.7395,-0.7046,-1.1824,-0.2268,265,-3.8713,,
+L,"L|XAUUSD|weekend gap: fade, large gaps only",XAUUSD,"weekend gap: fade, large gaps only",1456,2013-05-10,2018-12-31,-0.3202,-0.7697,-0.4284,-0.2453,-0.6114,90,-6.9301,,
+L,"L|XAUUSD|weekend gap: follow, large gaps only",XAUUSD,"weekend gap: follow, large gaps only",1456,2013-05-10,2018-12-31,0.0445,0.1070,0.0594,-0.0502,0.1690,90,0.9614,,
+N,"N|XAUUSD|Asian-range (00-07 UTC) breakout in London hours, out at 20:00 UTC",XAUUSD,"Asian-range (00-07 UTC) breakout in London hours, out at 20:00 UTC",1459,2013-05-09,2018-12-31,0.2177,0.5238,0.6963,2.2299,-0.8351,915,1.1103,,
+O,O|XAUUSD|hourly mean reversion: fade 2 sd from the 20-bar mean,XAUUSD,hourly mean reversion: fade 2 sd from the 20-bar mean,1456,2013-05-10,2018-12-31,-1.0800,-2.5960,-4.4834,-5.0304,-3.9365,1269,-5.1441,,
+O,O|XAUUSD|hourly mean reversion: fade 2 sd from the 50-bar mean,XAUUSD,hourly mean reversion: fade 2 sd from the 50-bar mean,1456,2013-05-10,2018-12-31,-0.7003,-1.6833,-2.9447,-3.0938,-2.7955,571,-7.5087,,
+P,P|EURUSD|buy on weekday 0 only (0 = Monday),EURUSD,buy on weekday 0 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.4154,-1.0749,-0.5078,-0.8880,-0.1263,338,-2.5347,1.0706,2.9581
+P,P|EURUSD|sell on weekday 0 only (0 = Monday),EURUSD,sell on weekday 0 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.6686,-1.7299,-0.8183,-0.4414,-1.1964,338,-4.0840,-1.0706,-2.9581
+P,P|EURUSD|buy on weekday 1 only (0 = Monday),EURUSD,buy on weekday 1 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.7426,-1.9214,-1.0112,-0.9776,-1.0450,337,-5.0621,-0.5814,-1.7283
+P,P|EURUSD|sell on weekday 1 only (0 = Monday),EURUSD,sell on weekday 1 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.0715,-0.1851,-0.0972,-0.1321,-0.0623,337,-0.4868,0.5814,1.7283
+P,P|EURUSD|buy on weekday 2 only (0 = Monday),EURUSD,buy on weekday 2 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.4277,-1.1066,-0.6127,-0.2792,-0.9474,338,-3.0581,0.2438,0.7532
+P,P|EURUSD|sell on weekday 2 only (0 = Monday),EURUSD,sell on weekday 2 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.3463,-0.8960,-0.4959,-0.8333,-0.1573,338,-2.4753,-0.2438,-0.7532
+P,P|EURUSD|buy on weekday 3 only (0 = Monday),EURUSD,buy on weekday 3 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.3593,-0.9296,-0.5878,-0.4708,-0.7052,338,-2.9336,0.2658,0.9107
+P,P|EURUSD|sell on weekday 3 only (0 = Monday),EURUSD,sell on weekday 3 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.3184,-0.8239,-0.5209,-0.6287,-0.4127,338,-2.5997,-0.2658,-0.9107
+P,P|EURUSD|buy on weekday 4 only (0 = Monday),EURUSD,buy on weekday 4 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.8136,-2.1052,-1.1915,-2.0983,-0.2815,336,-5.9824,-0.9202,-2.9001
+P,P|EURUSD|sell on weekday 4 only (0 = Monday),EURUSD,sell on weekday 4 only (0 = Monday),1687,2014-07-01,2020-12-31,0.0612,0.1584,0.0894,0.9975,-0.8219,336,0.4490,0.9202,2.9001
+P,P|USDJPY|buy on weekday 0 only (0 = Monday),USDJPY,buy on weekday 0 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.1024,-0.2649,-0.1525,0.0417,-0.3473,338,-0.7610,0.5011,1.6247
+P,P|USDJPY|sell on weekday 0 only (0 = Monday),USDJPY,sell on weekday 0 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.7349,-1.9014,-1.0967,-1.2941,-0.8987,338,-5.4739,-0.5011,-1.6247
+P,P|USDJPY|buy on weekday 1 only (0 = Monday),USDJPY,buy on weekday 1 only (0 = Monday),1687,2014-07-01,2020-12-31,0.0980,0.2537,0.1409,-0.1519,0.4348,337,0.7055,1.0897,3.4343
+P,P|USDJPY|sell on weekday 1 only (0 = Monday),USDJPY,sell on weekday 1 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.8139,-2.1058,-1.1725,-0.8806,-1.4654,337,-5.8695,-1.0897,-3.4343
+P,P|USDJPY|buy on weekday 2 only (0 = Monday),USDJPY,buy on weekday 2 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.2312,-0.5983,-0.3467,-0.4251,-0.2680,338,-1.7304,0.1218,0.3962
+P,P|USDJPY|sell on weekday 2 only (0 = Monday),USDJPY,sell on weekday 2 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.4566,-1.1814,-0.6849,-0.6102,-0.7600,338,-3.4187,-0.1218,-0.3962
+P,P|USDJPY|buy on weekday 3 only (0 = Monday),USDJPY,buy on weekday 3 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.5623,-1.4550,-0.8290,-0.2272,-1.4329,338,-4.1376,-0.8147,-2.6154
+P,P|USDJPY|sell on weekday 3 only (0 = Monday),USDJPY,sell on weekday 3 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.1376,-0.3560,-0.2027,-0.7959,0.3927,338,-1.0115,0.8147,2.6154
+P,P|USDJPY|buy on weekday 4 only (0 = Monday),USDJPY,buy on weekday 4 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.5020,-1.2988,-0.8622,-0.3184,-1.4080,336,-4.3290,-0.7857,-2.8488
+P,P|USDJPY|sell on weekday 4 only (0 = Monday),USDJPY,sell on weekday 4 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.0952,-0.2463,-0.1633,-0.7060,0.3812,336,-0.8201,0.7857,2.8488
+P,P|GBPUSD|buy on weekday 0 only (0 = Monday),GBPUSD,buy on weekday 0 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.8584,-2.2211,-1.2842,-1.1839,-1.3848,338,-6.4096,-0.5922,-1.9858
+P,P|GBPUSD|sell on weekday 0 only (0 = Monday),GBPUSD,sell on weekday 0 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.0280,-0.0725,-0.0418,-0.1454,0.0622,338,-0.2087,0.5922,1.9858
+P,P|GBPUSD|buy on weekday 1 only (0 = Monday),GBPUSD,buy on weekday 1 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.2749,-0.7113,-0.4795,-0.9816,0.0244,337,-2.4002,0.5504,2.0647
+P,P|GBPUSD|sell on weekday 1 only (0 = Monday),GBPUSD,sell on weekday 1 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.3605,-0.9327,-0.6289,-0.1279,-1.1317,337,-3.1483,-0.5504,-2.0647
+P,P|GBPUSD|buy on weekday 2 only (0 = Monday),GBPUSD,buy on weekday 2 only (0 = Monday),1687,2014-07-01,2020-12-31,0.2056,0.5319,0.3287,0.7815,-0.1257,338,1.6406,2.0228,7.1063
+P,P|GBPUSD|sell on weekday 2 only (0 = Monday),GBPUSD,sell on weekday 2 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.8965,-2.3197,-1.4373,-1.8940,-0.9789,338,-7.1736,-2.0228,-7.1063
+P,P|GBPUSD|buy on weekday 3 only (0 = Monday),GBPUSD,buy on weekday 3 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.4684,-1.2120,-0.7471,-0.3622,-1.1334,338,-3.7289,0.1119,0.3927
+P,P|GBPUSD|sell on weekday 3 only (0 = Monday),GBPUSD,sell on weekday 3 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.2268,-0.5867,-0.3615,-0.7372,0.0156,338,-1.8041,-0.1119,-0.3927
+P,P|GBPUSD|buy on weekday 4 only (0 = Monday),GBPUSD,buy on weekday 4 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.9683,-2.5054,-2.0197,-3.8072,-0.2259,336,-10.1408,-1.7627,-7.6161
+P,P|GBPUSD|sell on weekday 4 only (0 = Monday),GBPUSD,sell on weekday 4 only (0 = Monday),1687,2014-07-01,2020-12-31,0.4412,1.1414,0.9177,2.7065,-0.8775,336,4.6078,1.7627,7.6161
+P,P|AUDUSD|buy on weekday 0 only (0 = Monday),AUDUSD,buy on weekday 0 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.7505,-1.9418,-1.0788,-1.4795,-0.6767,338,-5.3844,0.1017,0.3337
+P,P|AUDUSD|sell on weekday 0 only (0 = Monday),AUDUSD,sell on weekday 0 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.6708,-1.7356,-0.9637,-0.5683,-1.3605,338,-4.8100,-0.1017,-0.3337
+P,P|AUDUSD|buy on weekday 1 only (0 = Monday),AUDUSD,buy on weekday 1 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.0355,-0.0918,-0.0634,0.4631,-0.5917,337,-0.3172,1.6639,6.3687
+P,P|AUDUSD|sell on weekday 1 only (0 = Monday),AUDUSD,sell on weekday 1 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.9826,-2.5422,-1.7615,-2.2910,-1.2301,337,-8.8180,-1.6639,-6.3687
+P,P|AUDUSD|buy on weekday 2 only (0 = Monday),AUDUSD,buy on weekday 2 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.5161,-1.3353,-0.9863,-0.6317,-1.3422,338,-4.9229,0.1520,0.6129
+P,P|AUDUSD|sell on weekday 2 only (0 = Monday),AUDUSD,sell on weekday 2 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.4395,-1.1372,-0.8398,-1.2013,-0.4770,338,-4.1915,-0.1520,-0.6129
+P,P|AUDUSD|buy on weekday 3 only (0 = Monday),AUDUSD,buy on weekday 3 only (0 = Monday),1687,2014-07-01,2020-12-31,-1.0063,-2.6037,-1.7324,-1.6077,-1.8575,338,-8.6466,-1.0875,-4.0380
+P,P|AUDUSD|sell on weekday 3 only (0 = Monday),AUDUSD,sell on weekday 3 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.0546,-0.1413,-0.0937,-0.2037,0.0166,338,-0.4678,1.0875,4.0380
+P,P|AUDUSD|buy on weekday 4 only (0 = Monday),AUDUSD,buy on weekday 4 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.8959,-2.3179,-1.6028,-2.8227,-0.3786,336,-8.0475,-0.8559,-3.2911
+P,P|AUDUSD|sell on weekday 4 only (0 = Monday),AUDUSD,sell on weekday 4 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.1191,-0.3081,-0.2125,1.0100,-1.4393,336,-1.0670,0.8559,3.2911
+P,P|USDCAD|buy on weekday 0 only (0 = Monday),USDCAD,buy on weekday 0 only (0 = Monday),1687,2014-07-01,2020-12-31,0.0571,0.1479,0.0705,0.3788,-0.2388,338,0.3520,1.2347,3.3839
+P,P|USDCAD|sell on weekday 0 only (0 = Monday),USDCAD,sell on weekday 0 only (0 = Monday),1687,2014-07-01,2020-12-31,-1.1850,-3.0660,-1.4712,-1.7831,-1.1583,338,-7.3431,-1.2347,-3.3839
+P,P|USDCAD|buy on weekday 1 only (0 = Monday),USDCAD,buy on weekday 1 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.4209,-1.0891,-0.5544,-0.4659,-0.6432,337,-2.7752,-0.4278,-1.2266
+P,P|USDCAD|sell on weekday 1 only (0 = Monday),USDCAD,sell on weekday 1 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.4774,-1.2351,-0.6287,-0.7186,-0.5385,337,-3.1472,0.4278,1.2266
+P,P|USDCAD|buy on weekday 2 only (0 = Monday),USDCAD,buy on weekday 2 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.7454,-1.9285,-1.1993,-1.6882,-0.7087,338,-5.9860,-1.5710,-5.2498
+P,P|USDCAD|sell on weekday 2 only (0 = Monday),USDCAD,sell on weekday 2 only (0 = Monday),1687,2014-07-01,2020-12-31,0.0099,0.0257,0.0160,0.5006,-0.4704,338,0.0796,1.5710,5.2498
+P,P|USDCAD|buy on weekday 3 only (0 = Monday),USDCAD,buy on weekday 3 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.3521,-0.9109,-0.4191,-0.8301,-0.0066,338,-2.0918,-0.1430,-0.3814
+P,P|USDCAD|sell on weekday 3 only (0 = Monday),USDCAD,sell on weekday 3 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.6414,-1.6595,-0.7643,-0.3435,-1.1865,338,-3.8146,0.1430,0.3814
+P,P|USDCAD|buy on weekday 4 only (0 = Monday),USDCAD,buy on weekday 4 only (0 = Monday),1687,2014-07-01,2020-12-31,0.1429,0.3697,0.2016,1.4183,-1.0194,336,1.0123,1.1533,3.4971
+P,P|USDCAD|sell on weekday 4 only (0 = Monday),USDCAD,sell on weekday 4 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.9734,-2.5184,-1.3780,-2.5932,-0.1584,336,-6.9187,-1.1533,-3.4971
+P,P|USDCHF|buy on weekday 0 only (0 = Monday),USDCHF,buy on weekday 0 only (0 = Monday),1687,2014-07-01,2020-12-31,0.2472,0.6396,0.3116,1.4521,-0.8328,338,1.5554,1.6472,5.1000
+P,P|USDCHF|sell on weekday 0 only (0 = Monday),USDCHF,sell on weekday 0 only (0 = Monday),1687,2014-07-01,2020-12-31,-1.5200,-3.9328,-1.9335,-3.0781,-0.7849,338,-9.6504,-1.6472,-5.1000
+P,P|USDCHF|buy on weekday 1 only (0 = Monday),USDCHF,buy on weekday 1 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.0184,-0.0477,-0.0243,0.0723,-0.1212,337,-0.1217,1.0698,3.4002
+P,P|USDCHF|sell on weekday 1 only (0 = Monday),USDCHF,sell on weekday 1 only (0 = Monday),1687,2014-07-01,2020-12-31,-1.0414,-2.6944,-1.3799,-1.4784,-1.2811,337,-6.9078,-1.0698,-3.4002
+P,P|USDCHF|buy on weekday 2 only (0 = Monday),USDCHF,buy on weekday 2 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.3354,-0.8679,-0.4902,-0.9041,-0.0748,338,-2.4466,0.1482,0.5022
+P,P|USDCHF|sell on weekday 2 only (0 = Monday),USDCHF,sell on weekday 2 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.6252,-1.6177,-0.9147,-0.5059,-1.3249,338,-4.5653,-0.1482,-0.5022
+P,P|USDCHF|buy on weekday 3 only (0 = Monday),USDCHF,buy on weekday 3 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.6940,-1.7955,-2.1736,-2.8964,-1.4481,338,-10.8485,-1.6207,-10.0073
+P,P|USDCHF|sell on weekday 3 only (0 = Monday),USDCHF,sell on weekday 3 only (0 = Monday),1687,2014-07-01,2020-12-31,0.2458,0.6359,0.7687,1.5030,0.0318,338,3.8367,1.6207,10.0073
+P,P|USDCHF|buy on weekday 4 only (0 = Monday),USDCHF,buy on weekday 4 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.2913,-0.7537,-0.4046,0.4764,-1.2886,336,-2.0312,0.3100,1.0207
+P,P|USDCHF|sell on weekday 4 only (0 = Monday),USDCHF,sell on weekday 4 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.7132,-1.8453,-0.9920,-1.8711,-0.1098,336,-4.9807,-0.3100,-1.0207
+P,P|NZDUSD|buy on weekday 0 only (0 = Monday),NZDUSD,buy on weekday 0 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.9629,-2.4914,-1.5321,-2.1448,-0.9172,338,-7.6469,-0.3509,-1.2561
+P,P|NZDUSD|sell on weekday 0 only (0 = Monday),NZDUSD,sell on weekday 0 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.6672,-1.7263,-1.0597,-0.4537,-1.6678,338,-5.2890,0.3509,1.2561
+P,P|NZDUSD|buy on weekday 1 only (0 = Monday),NZDUSD,buy on weekday 1 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.6249,-1.6169,-1.0864,-1.0245,-1.1486,337,-5.4386,0.3924,1.4936
+P,P|NZDUSD|sell on weekday 1 only (0 = Monday),NZDUSD,sell on weekday 1 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.7403,-1.9154,-1.2877,-1.3542,-1.2210,337,-6.4462,-0.3924,-1.4936
+P,P|NZDUSD|buy on weekday 2 only (0 = Monday),NZDUSD,buy on weekday 2 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.2622,-0.6784,-0.5548,-0.0578,-1.0535,338,-2.7689,1.0898,4.8207
+P,P|NZDUSD|sell on weekday 2 only (0 = Monday),NZDUSD,sell on weekday 2 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.8591,-2.2227,-1.8214,-2.3276,-1.3135,338,-9.0910,-1.0898,-4.8207
+P,P|NZDUSD|buy on weekday 3 only (0 = Monday),NZDUSD,buy on weekday 3 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.9062,-2.3448,-1.7266,-1.2548,-2.2001,338,-8.6178,-0.6112,-2.4869
+P,P|NZDUSD|sell on weekday 3 only (0 = Monday),NZDUSD,sell on weekday 3 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.3417,-0.8842,-0.6496,-1.1025,-0.1951,338,-3.2422,0.6112,2.4869
+P,P|NZDUSD|buy on weekday 4 only (0 = Monday),NZDUSD,buy on weekday 4 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.9604,-2.4849,-1.7313,-2.8139,-0.6449,336,-8.6927,-0.6592,-2.5855
+P,P|NZDUSD|sell on weekday 4 only (0 = Monday),NZDUSD,sell on weekday 4 only (0 = Monday),1687,2014-07-01,2020-12-31,-0.3508,-0.9077,-0.6308,0.4553,-1.7208,336,-3.1672,0.6592,2.5855
+P,P|XAUUSD|buy on weekday 0 only (0 = Monday),XAUUSD,buy on weekday 0 only (0 = Monday),1679,2014-07-01,2020-12-31,-0.6501,-1.6779,-1.5735,-2.9230,-0.2223,336,-7.8627,-1.3138,-6.9067
+P,P|XAUUSD|sell on weekday 0 only (0 = Monday),XAUUSD,sell on weekday 0 only (0 = Monday),1679,2014-07-01,2020-12-31,-0.0254,-0.0654,-0.0612,1.2921,-1.4162,336,-0.3060,1.3138,6.9067
+P,P|XAUUSD|buy on weekday 1 only (0 = Monday),XAUUSD,buy on weekday 1 only (0 = Monday),1679,2014-07-01,2020-12-31,-0.1142,-0.2948,-0.2872,-0.6872,0.1133,337,-1.4309,-0.2181,-1.1742
+P,P|XAUUSD|sell on weekday 1 only (0 = Monday),XAUUSD,sell on weekday 1 only (0 = Monday),1679,2014-07-01,2020-12-31,-0.3221,-0.8313,-0.8106,-0.4151,-1.2065,337,-4.0384,0.2181,1.1742
+P,P|XAUUSD|buy on weekday 2 only (0 = Monday),XAUUSD,buy on weekday 2 only (0 = Monday),1679,2014-07-01,2020-12-31,-0.1075,-0.2775,-0.2504,-0.7136,0.2134,338,-1.2437,-0.1919,-0.9759
+P,P|XAUUSD|sell on weekday 2 only (0 = Monday),XAUUSD,sell on weekday 2 only (0 = Monday),1679,2014-07-01,2020-12-31,-0.3607,-0.9310,-0.8405,-0.3814,-1.3001,338,-4.1749,0.1919,0.9759
+P,P|XAUUSD|buy on weekday 3 only (0 = Monday),XAUUSD,buy on weekday 3 only (0 = Monday),1679,2014-07-01,2020-12-31,0.0792,0.2043,0.1884,-0.4325,0.8100,338,0.9359,0.3396,1.7539
+P,P|XAUUSD|sell on weekday 3 only (0 = Monday),XAUUSD,sell on weekday 3 only (0 = Monday),1679,2014-07-01,2020-12-31,-0.5368,-1.3855,-1.2792,-0.6496,-1.9096,338,-6.3544,-0.3396,-1.7539
+P,P|XAUUSD|buy on weekday 4 only (0 = Monday),XAUUSD,buy on weekday 4 only (0 = Monday),1679,2014-07-01,2020-12-31,0.4241,1.0948,1.0757,1.5485,0.6022,330,5.4728,1.3412,7.3888
+P,P|XAUUSD|sell on weekday 4 only (0 = Monday),XAUUSD,sell on weekday 4 only (0 = Monday),1679,2014-07-01,2020-12-31,-0.8420,-2.1735,-2.1407,-2.6146,-1.6663,330,-10.8916,-1.3412,-7.3888
+P,P|XAGUSD|buy on weekday 0 only (0 = Monday),XAGUSD,buy on weekday 0 only (0 = Monday),1079,2016-10-26,2020-12-31,-0.4964,-1.0272,-2.4337,-6.3211,1.4636,215,-12.2139,-0.2895,-3.8187
+P,P|XAGUSD|sell on weekday 0 only (0 = Monday),XAGUSD,sell on weekday 0 only (0 = Monday),1079,2016-10-26,2020-12-31,-0.5768,-1.1936,-2.8290,1.1728,-6.8509,215,-14.1976,0.2895,3.8187
+P,P|XAGUSD|buy on weekday 1 only (0 = Monday),XAGUSD,buy on weekday 1 only (0 = Monday),1079,2016-10-26,2020-12-31,-0.1370,-0.2835,-0.7247,-2.3137,0.8689,216,-3.6200,0.3153,4.3825
+P,P|XAGUSD|sell on weekday 1 only (0 = Monday),XAGUSD,sell on weekday 1 only (0 = Monday),1079,2016-10-26,2020-12-31,-0.7617,-1.5762,-4.0371,-2.5028,-5.5847,216,-20.1670,-0.3153,-4.3825
+P,P|XAGUSD|buy on weekday 2 only (0 = Monday),XAGUSD,buy on weekday 2 only (0 = Monday),1079,2016-10-26,2020-12-31,0.0358,0.0741,0.1591,-0.2501,0.5701,216,0.7946,0.8101,9.8494
+P,P|XAGUSD|sell on weekday 2 only (0 = Monday),XAGUSD,sell on weekday 2 only (0 = Monday),1079,2016-10-26,2020-12-31,-1.1005,-2.2771,-4.9082,-4.5359,-5.2909,216,-24.5182,-0.8101,-9.8494
+P,P|XAGUSD|buy on weekday 3 only (0 = Monday),XAGUSD,buy on weekday 3 only (0 = Monday),1079,2016-10-26,2020-12-31,-0.7339,-1.5186,-3.1896,-6.2971,-0.0483,219,-15.7150,-0.9149,-10.8388
+P,P|XAGUSD|sell on weekday 3 only (0 = Monday),XAGUSD,sell on weekday 3 only (0 = Monday),1079,2016-10-26,2020-12-31,-0.3744,-0.7748,-1.6254,1.4903,-4.7607,219,-8.0084,0.9149,10.8388
+P,P|XAGUSD|buy on weekday 4 only (0 = Monday),XAGUSD,buy on weekday 4 only (0 = Monday),1079,2016-10-26,2020-12-31,-0.3048,-0.6308,-1.3140,-0.6775,-1.9448,213,-6.6562,0.0430,0.5167
+P,P|XAGUSD|sell on weekday 4 only (0 = Monday),XAGUSD,sell on weekday 4 only (0 = Monday),1079,2016-10-26,2020-12-31,-0.7797,-1.6134,-3.3667,-4.0207,-2.7061,213,-17.0547,-0.0430,-0.5167
+P,P|WTI|buy on weekday 0 only (0 = Monday),WTI,buy on weekday 0 only (0 = Monday),1679,2014-07-01,2020-12-31,-0.9820,-2.5348,-8.6520,-9.7801,-7.5227,336,-43.2345,-2.3319,-43.4460
+P,P|WTI|sell on weekday 0 only (0 = Monday),WTI,sell on weekday 0 only (0 = Monday),1679,2014-07-01,2020-12-31,0.6485,1.6739,5.6998,6.8344,4.5638,336,28.4819,2.3319,43.4460
+P,P|WTI|buy on weekday 1 only (0 = Monday),WTI,buy on weekday 1 only (0 = Monday),1679,2014-07-01,2020-12-31,-0.2067,-0.5336,-1.8319,-2.1261,-1.5375,337,-9.1271,-0.1603,-2.9955
+P,P|WTI|sell on weekday 1 only (0 = Monday),WTI,sell on weekday 1 only (0 = Monday),1679,2014-07-01,2020-12-31,-0.0667,-0.1722,-0.5913,-0.3068,-0.8760,337,-2.9458,0.1603,2.9955
+P,P|WTI|buy on weekday 2 only (0 = Monday),WTI,buy on weekday 2 only (0 = Monday),1679,2014-07-01,2020-12-31,0.2834,0.7314,2.2401,0.7690,3.7129,338,11.1275,1.3034,22.3058
+P,P|WTI|sell on weekday 2 only (0 = Monday),WTI,sell on weekday 2 only (0 = Monday),1679,2014-07-01,2020-12-31,-0.5886,-1.5194,-4.6583,-3.1984,-6.1199,338,-23.1398,-1.3034,-22.3058
+P,P|WTI|buy on weekday 3 only (0 = Monday),WTI,buy on weekday 3 only (0 = Monday),1679,2014-07-01,2020-12-31,0.1665,0.4298,1.2809,0.0301,2.5331,338,6.3626,0.9739,16.3408
+P,P|WTI|sell on weekday 3 only (0 = Monday),WTI,sell on weekday 3 only (0 = Monday),1679,2014-07-01,2020-12-31,-0.4805,-1.2403,-3.6991,-2.4309,-4.9687,338,-18.3749,-0.9739,-16.3408
+P,P|WTI|buy on weekday 4 only (0 = Monday),WTI,buy on weekday 4 only (0 = Monday),1679,2014-07-01,2020-12-31,-0.0160,-0.0413,-0.1076,-1.2375,1.0238,330,-0.5473,0.4923,7.6421
+P,P|WTI|sell on weekday 4 only (0 = Monday),WTI,sell on weekday 4 only (0 = Monday),1679,2014-07-01,2020-12-31,-0.3348,-0.8641,-2.2534,-1.1237,-3.3845,330,-11.4652,-0.4923,-7.6421
+P,P|BRENT|buy on weekday 0 only (0 = Monday),BRENT,buy on weekday 0 only (0 = Monday),864,2017-08-28,2020-12-31,-0.5652,-1.0466,-5.2067,0.3915,-10.8041,173,-26.0036,-0.9964,-26.5761
+P,P|BRENT|sell on weekday 0 only (0 = Monday),BRENT,sell on weekday 0 only (0 = Monday),864,2017-08-28,2020-12-31,0.2555,0.4731,2.3508,-3.2150,7.9092,173,11.7406,0.9964,26.5761
+P,P|BRENT|buy on weekday 1 only (0 = Monday),BRENT,buy on weekday 1 only (0 = Monday),864,2017-08-28,2020-12-31,-0.1365,-0.2528,-1.0598,-1.8597,-0.2641,173,-5.2926,-0.1383,-3.2082
+P,P|BRENT|sell on weekday 1 only (0 = Monday),BRENT,sell on weekday 1 only (0 = Monday),864,2017-08-28,2020-12-31,-0.1625,-0.3009,-1.2614,-0.4630,-2.0608,173,-6.2997,0.1383,3.2082
+P,P|BRENT|buy on weekday 2 only (0 = Monday),BRENT,buy on weekday 2 only (0 = Monday),864,2017-08-28,2020-12-31,0.2743,0.5078,1.7118,5.0729,-1.7708,173,8.5493,0.7112,14.0750
+P,P|BRENT|sell on weekday 2 only (0 = Monday),BRENT,sell on weekday 2 only (0 = Monday),864,2017-08-28,2020-12-31,-0.6442,-1.1929,-4.0267,-7.4214,-0.5007,173,-20.1100,-0.7112,-14.0750
+P,P|BRENT|buy on weekday 3 only (0 = Monday),BRENT,buy on weekday 3 only (0 = Monday),864,2017-08-28,2020-12-31,-0.0640,-0.1185,-0.4300,-2.5234,1.6634,175,-2.1231,0.0351,0.7253
+P,P|BRENT|sell on weekday 3 only (0 = Monday),BRENT,sell on weekday 3 only (0 = Monday),864,2017-08-28,2020-12-31,-0.2844,-0.5266,-1.9115,0.1930,-4.0097,175,-9.4374,-0.0351,-0.7253
+P,P|BRENT|buy on weekday 4 only (0 = Monday),BRENT,buy on weekday 4 only (0 = Monday),864,2017-08-28,2020-12-31,0.2762,0.5115,1.8496,0.9941,2.7074,170,9.4003,0.7159,15.0593
+P,P|BRENT|sell on weekday 4 only (0 = Monday),BRENT,sell on weekday 4 only (0 = Monday),864,2017-08-28,2020-12-31,-0.6148,-1.1384,-4.1211,-3.2709,-4.9790,170,-20.9451,-0.7159,-15.0593
+Q,Q|USDJPY|buy on gotobi days only,USDJPY,buy on gotobi days only,1687,2014-07-01,2020-12-31,-0.2549,-0.6596,-0.4960,-0.8879,-0.1027,462,-1.8112,0.1046,0.3271
+Q,Q|USDJPY|sell on gotobi days only,USDJPY,sell on gotobi days only,1687,2014-07-01,2020-12-31,-0.4905,-1.2692,-0.9548,-0.5677,-1.3433,462,-3.4864,-0.1046,-0.3271
