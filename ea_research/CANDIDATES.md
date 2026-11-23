@@ -391,6 +391,38 @@ IndexReversion_EA（米国株価指数の日足逆張り）の次に検証する
 
 弱く引けた翌日の戻りは、ニューヨークの引けに固有の性質でした。日経平均のサーバーの日足での成績は、米国の引けのあとの戻りを日経平均の値動きを通して取っているもので、日本に固有の優位性ではありません。
 
+## 第 7 弾の事前登録（2026-11-23、検証の前に記録）
+
+受け取り済みのデータで検証します。試行の数は 2 件です。
+
+### ⑮ ゴトー日の仲値に向けたドル買い（USDJPY）
+
+- **ねらい**：日本の輸入企業などのドル買いは、5 と 10 のつく日（ゴトー日）の仲値（東京時間 9:55）に集まりやすいと言われます（Ito & Yamada 2017）。仲値に向けて USDJPY が上がりやすいか、コストを引いても残るかを確かめます。
+- **データ**：USDJPY の 1 時間足、2010 年 1 月〜2026 年 11 月です。
+- **ゴトー日**：毎月 5・10・15・20・25 日と月末の日です。土曜か日曜に当たるときは、直前の金曜日にずらします。日本の祝日のカレンダーは使いません。
+- **売買（主案）**：ゴトー日の東京時間 9:00 に買い、10:00 に決済します。約定は、その時刻に始まる 1 時間足の始値とします。建玉は資産の 1 倍です。
+- **コスト**：その足のスプレッドの半分と滑り 0.5bp を、片道ごとに引きます。サーバー時刻の 0 時をまたがないので、スワップはかかりません。
+- **合格**：次の 2 つをどちらも満たすこと。
+  - コスト後のシャープが 0.3 以上で、前半と後半の両方でプラス
+  - 同じ時間帯のコスト前の平均リターンが、ゴトー日のほうが、それ以外の平日より高い（前半と後半の両方で）
+- **参考**（合否には使いません）：8:00〜10:00 の買い、仲値のあとの売り（10:00〜15:00）、ゴトー日以外の日の同じ時間帯。
+
+### ⑯ FOMC サイクルの偶数週（Cieslak, Morse & Vissing-Jorgensen 2019）
+
+- **ねらい**：米国株の上昇は、FOMC から数えて偶数番目の週（0・2・4・6 週目）に集中してきた、という報告があります（1994〜2016 年）。第 4 弾の ⑩（FOMC 前の上昇）が惜しい結果だったので、その周辺も確かめます。
+- **データ**：US500 の日足（サーバーの 1 日）、2014 年 1 月〜2026 年 11 月と、定例の FOMC の日程です。
+- **週の数え方**
+  - 定例の FOMC 声明の日を 0 日目として、ニューヨーク証券取引所の営業日で数えます。
+  - w 週目は、(5w − 1) 日目から (5w + 3) 日目までです。0 週目は、前日から 3 日後までになります。
+  - 次の FOMC の前日からは、次のサイクルの 0 週目として数えます。7 週目以降は対象にしません。
+- **売買**：偶数週（0・2・4・6 週目）の営業日だけ、US500 を資産の 1 倍で持ちます。偶数週の最初の日の前の終値で買い、最後の日の終値で売ります。
+- **コスト**：建玉の変化 × (業者のスプレッドの中央値 + 1bp) ÷ 2 を引きます。金利は、米政策金利 + 2.5%/年を 1 泊ごとに引きます。
+- **合格**：次の 2 つをどちらも満たすこと。
+  - コスト・金利後のシャープが 0.3 以上で、前半と後半の両方でプラス
+  - 偶数週の 1 日あたりの平均リターンが、奇数週（1・3・5 週目）を前半と後半の両方で上回り、全期間の差の t 値が 2.0 以上
+- **参考**（合否には使いません）：US100 での同じ計算、週ごとの平均。
+- **注意**：米国株は期間中に大きく上がったので、買いだけの戦略は良く見えやすいです。2 つ目の基準は、そのための歯止めです。
+
 ## 検証済みで不採用にしたもの（REPORT.md）
 
 | ロジック | 不採用の理由 |
@@ -419,8 +451,10 @@ IndexReversion_EA（米国株価指数の日足逆張り）の次に検証する
 
 - Brunnermeier, M., Nagel, S. & Pedersen, L. H. (2008) "Carry Trades and Currency Crashes", *NBER Macroeconomics Annual* 23.
 - Cliff, M., Cooper, M. & Gulen, H. (2008) "Return Differences between Trading and Non-trading Hours: Like Night and Day", working paper.
+- Cieslak, A., Morse, A. & Vissing-Jorgensen, A. (2019) "Stock Returns over the FOMC Cycle", *Journal of Finance* 74(5).
 - Evans, M. (2018) "Forex Trading and the WMR Fix", *Journal of Banking & Finance* 87.
 - Hurst, B., Ooi, Y. H. & Pedersen, L. H. (2017) "A Century of Evidence on Trend-Following Investing", *Journal of Portfolio Management* 44(1).
+- Ito, T. & Yamada, M. (2017) "Was the Forex Fixing Different in Tokyo? Regulators' Responses and Market Microstructure", *Journal of International Money and Finance* 70.
 - Kurov, A., Wolfe, M. & Gilbert, T. (2021) "The Disappearing Pre-FOMC Announcement Drift", *Finance Research Letters* 40.
 - Lou, D., Polk, C. & Skouras, S. (2019) "A Tug of War: Overnight versus Intraday Expected Returns", *Journal of Financial Economics* 134(1).
 - Lucca, D. & Moench, E. (2015) "The Pre-FOMC Announcement Drift", *Journal of Finance* 70(1).
